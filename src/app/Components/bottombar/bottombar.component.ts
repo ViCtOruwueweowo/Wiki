@@ -11,9 +11,9 @@ import { RouterLink } from '@angular/router';
 })
 export class BottombarComponent implements OnInit {
 
+  userRole: string | null = null;
 
-  constructor() { }
-
-  ngOnInit() { }
-
+  ngOnInit() {
+    this.userRole = localStorage.getItem('userRole'); // leemos rol
+  }
 }

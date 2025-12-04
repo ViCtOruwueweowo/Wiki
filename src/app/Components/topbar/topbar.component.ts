@@ -14,9 +14,11 @@ import { RouterLink } from '@angular/router';
 export class TopbarComponent implements OnInit {
 
   isMobile: boolean = false;
+  userRole: string | null = null;
 
   ngOnInit() {
     this.checkScreen();
+    this.getUserRole();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -25,7 +27,11 @@ export class TopbarComponent implements OnInit {
   }
 
   checkScreen() {
-    this.isMobile = window.innerWidth <= 768; // ajusta breakpoint
+    this.isMobile = window.innerWidth <= 768;
+  }
+
+  getUserRole(){
+    this.userRole = localStorage.getItem('userRole'); // ← lee el rol
   }
 
 }

@@ -121,7 +121,7 @@ async cargarJuegos() {
   async eliminarJuego(juego: any) {
     const alert = await this.alertCtrl.create({
       header: 'Confirmar eliminación',
-      message: `¿Deseas eliminar el juego <b>${juego.nombre}</b>?`,
+      message: `¿Deseas eliminar a <b>${juego.nombre}</b>?`,
       buttons: [
         { text: 'Cancelar', role: 'cancel' },
         { text: 'Eliminar', role: 'confirm', handler: () => this.confirmDeleteJuego(juego) }
@@ -136,7 +136,7 @@ async cargarJuegos() {
     const loading = await this.loadingCtrl.create({ message: 'Eliminando juego...' });
     await loading.present();
 
-    this.http.delete(`http://127.0.0.1:8000/api/games/deactivate/${juego.id}`, {
+    this.http.delete(`http://127.0.0.1:8000/api/games1/deactivate/${juego.id}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: async (res: any) => {

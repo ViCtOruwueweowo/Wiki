@@ -1,0 +1,79 @@
+<ion-header *ngIf="!isMobile">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="user">
+
+  <ion-card style="margin:15px; border-radius:15px;">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+       Mi Perfil
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item lines="none">
+        <ion-label><b>Nombre:</b></ion-label>
+       <ion-note style="font-size:16px; font-weight:500;">{{user.first_name}} {{user.last_name}}</ion-note>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label><b>Email:</b></ion-label>
+      <ion-note style="font-size:16px; font-weight:500;">{{user.email}}</ion-note>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label><b>Teléfono:</b></ion-label>
+       <ion-note style="font-size:16px; font-weight:500;">{{user.phone}}</ion-note>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label><b>Estado:</b></ion-label>
+      <ion-note style="font-size:16px; font-weight:500;">{{user.status}}</ion-note>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+ <!-- FAVORITOS -->
+  <ion-card style="margin:15px; border-radius:15px;">
+    <ion-card-header>
+      <ion-card-title> Mis Favoritos</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="favorites.length === 0">
+        <p>No tienes favoritos aún.</p>
+      </div>
+
+      <ion-list *ngIf="favorites.length > 0">
+        <ion-item *ngFor="let fav of favorites">
+          <ion-label>{{ fav.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" color="secondary" (click)="goFav()">
+        Ver Todos / Administrar Favoritos →
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="padding:20px;text-align:center;">
+    <ion-button expand="block" (click)="update()" shape="round" color="primary">
+      Actualizar Perfil
+    </ion-button>
+
+    <ion-button expand="block" color="danger" shape="round" (click)="logout()">
+      Cerrar Sesión
+    </ion-button>
+  </div>
+
+ 
+</ion-content>
+
+<!-- FOOTER SOLO EN MÓVIL -->
+<ion-footer *ngIf="isMobile">
+  <ion-toolbar>
+    <app-bottombar></app-bottombar>
+  </ion-toolbar>
+</ion-footer>

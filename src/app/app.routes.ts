@@ -54,5 +54,13 @@ export const routes: Routes = [
     path: 'wiki-detail/:id',
     loadComponent: () => import('./Pages/wiki-detail/wiki-detail.page').then( m => m.WikiDetailPage)
   },
+  {
+    path: 'profile',
+    loadComponent: () => import('./Pages/profile/profile.page').then( m => m.ProfilePage)
+  },
+  {
+    path: 'favorites',
+    loadComponent: () => import('./Pages/favorites/favorites.page').then( m => m.FavoritesPage)
+  },
   
 ];

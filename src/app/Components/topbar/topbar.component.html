@@ -1,14 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-<!--    <ion-title>Universal Wikis Utopia</ion-title> -->
 
     <ion-buttons slot="end">
+
       <ion-button routerLink="/">Inicio</ion-button>
-      <ion-button routerLink="/login">Login</ion-button>
+
+      <!-- Mostrar Login solo si NO hay userRole -->
+      <ion-button *ngIf="!userRole" routerLink="/login">Login</ion-button>
+
       <ion-button routerLink="/wikis">Wikis</ion-button>
-      <ion-button routerLink="/favorites">Favoritos</ion-button>
-      <ion-button routerLink="/gestion">Gestion</ion-button>
-      <ion-button routerLink="/profile">Yo</ion-button>
+
+      <!-- Mostrar favoritos solo si existe userRole -->
+      <ion-button *ngIf="userRole" routerLink="/favorites">Favoritos</ion-button>
+
+      <!-- Gestión solo si userRole == 'admin' -->
+      <ion-button *ngIf="userRole === 'admin'" routerLink="/gestion">Gestion</ion-button>
+
+      <!-- Perfil si hay sesión -->
+      <ion-button *ngIf="userRole" routerLink="/profile">Yo</ion-button>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

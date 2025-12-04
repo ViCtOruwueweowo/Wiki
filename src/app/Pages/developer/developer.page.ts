@@ -107,7 +107,7 @@ export class DeveloperPage implements OnInit {
     async eliminarCategoria(categoria: any) {
       const alert = await this.alertCtrl.create({
         header: 'Confirmar eliminación',
-        message: `¿Deseas eliminar la categoría "${categoria.nombre}"?`,
+        message: `¿Deseas eliminar a "${categoria.nombre}"?`,
         buttons: [
           { text: 'Cancelar', role: 'cancel' },
           {
@@ -133,14 +133,14 @@ export class DeveloperPage implements OnInit {
           await loading.dismiss();
           if (res.success) {
             this.categorias = this.categorias.filter((c) => c.id !== categoria.id);
-            this.showToast(res.message || 'Categoría eliminada correctamente', 'success');
+            this.showToast(res.message || 'Desarrollador eliminada correctamente', 'success');
           } else {
-            this.showToast(res.message || 'Error al eliminar categoría', 'danger');
+            this.showToast(res.message || 'Error al eliminar desarrollador', 'danger');
           }
         },
         error: async () => {
           await loading.dismiss();
-          this.showToast('Error al eliminar categoría', 'danger');
+          this.showToast('Error al eliminar desarrolaldor', 'danger');
         }
       });
     }
