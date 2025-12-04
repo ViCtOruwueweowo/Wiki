@@ -1,0 +1,104 @@
+<ion-header *ngIf="!isMobile">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="6" size-md="3">
+        <ion-card button routerLink="/games" style="border-radius: 20px;">
+          <h5 class="ion-text-center">Juegos</h5>
+          <ion-card-content>
+            <h2 class="ion-text-center lobotomy-title">{{ gamesTotal }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" size-md="3">
+        <ion-card button routerLink="/category" style="border-radius: 20px;">
+          <h5 class="ion-text-center">Categorias</h5>
+          <ion-card-content>
+            <h2 class="ion-text-center lobotomy-title">{{ categoriesTotal }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" size-md="3">
+        <ion-card button routerLink="/developer" style="border-radius: 20px;">
+          <h5 class="ion-text-center">Desarrollador</h5>
+          <ion-card-content>
+            <h2 class="ion-text-center lobotomy-title">{{ developersTotal }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" size-md="3">
+        <ion-card button routerLink="/platform" style="border-radius: 20px;">
+          <h5 class="ion-text-center">Plataforma</h5>
+          <ion-card-content>
+            <h2 class="ion-text-center lobotomy-title">{{ platformsTotal }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <div class="page-content">
+    <h4 class="ion-text-center">Gestion Administrativa</h4>
+  </div>
+
+  <!-- Gráfica -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Estadísticas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="statsChart"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="6" size-md="3">
+        <ion-card>
+          <ion-card-header><ion-card-title class="ion-text-center">📊 Juegos</ion-card-title></ion-card-header>
+          <ion-card-content><canvas id="gamesChart" style="height:160px;"></canvas></ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" size-md="3">
+        <ion-card>
+          <ion-card-header><ion-card-title class="ion-text-center">📊 Categorías</ion-card-title></ion-card-header>
+          <ion-card-content><canvas id="categoriesChart" style="height:160px;"></canvas></ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" size-md="3">
+        <ion-card>
+          <ion-card-header><ion-card-title class="ion-text-center">📊 Desarrolladores</ion-card-title></ion-card-header>
+          <ion-card-content><canvas id="developersChart" style="height:160px;"></canvas></ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" size-md="3">
+        <ion-card>
+          <ion-card-header><ion-card-title class="ion-text-center">📊 Plataformas</ion-card-title></ion-card-header>
+          <ion-card-content><canvas id="platformsChart" style="height:160px;"></canvas></ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content> <!-- ← ahora sí correctamente cerrado -->
+
+<!-- Footer en móvil -->
+<ion-footer *ngIf="isMobile">
+  <ion-toolbar>
+    <app-bottombar></app-bottombar>
+  </ion-toolbar>
+</ion-footer>

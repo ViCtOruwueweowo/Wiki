@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true">
+ <div class="login-wrapper">
+    <ion-card class="lobotomy-card">
+      <ion-card-header>
+        <ion-card-title class="lobotomy-title ion-text-center">
+          CÓDIGO DE SEGURIDAD
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item class="lobotomy-item">
+          <ion-input
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+            [(ngModel)]="code"
+            placeholder="000000"
+            class="lobotomy-input">
+          </ion-input>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          (click)="verifyCode()"
+          class="lobotomy-button ion-margin-top">
+          Ingresar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

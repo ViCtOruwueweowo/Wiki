@@ -1,0 +1,52 @@
+<ion-header *ngIf="!isMobile">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-categorias">
+
+  <!-- Header condensado -->
+  <ion-header collapse="condense" *ngIf="!isMobile">
+    <ion-toolbar color="light">
+      <ion-title size="large" class="text-center">
+        Gestión de Categorías
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Título principal -->
+  <div class="section-header">
+    <h1 class="page-title text-center">Gestión de Desarrolladores</h1>
+  </div>
+
+  <!-- Botón principal -->
+  <ion-button expand="block" color="primary" class="btn-crear" (click)="crearCategoria()">
+    <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+    Crear nuevo desarrollador
+  </ion-button>
+
+  <!-- Lista de categorías -->
+  <ion-list class="category-list">
+    <ion-item *ngFor="let categoria of categorias" class="category-item">
+      <ion-label>
+        <h2 class="category-name">{{ categoria.nombre }}</h2>
+      </ion-label>
+
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="medium" (click)="editarCategoria(categoria)">
+         Modificar
+        </ion-button>
+
+        <ion-button fill="clear" color="danger" (click)="eliminarCategoria(categoria)">
+         Eliminar
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="isMobile">
+  <ion-toolbar>
+    <app-bottombar></app-bottombar>
+  </ion-toolbar>
+</ion-footer>

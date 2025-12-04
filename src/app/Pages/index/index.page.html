@@ -1,0 +1,94 @@
+<ion-header *ngIf="!isMobile">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- HEADER SOLO EN PC -->
+  <ion-header collapse="condense" *ngIf="!isMobile">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="page-content" style="padding: 10px;">
+
+    <!-- ---------- HERO CARDS ESTÁTICAS ---------- -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card class="Hero-Cards">
+            <ion-card-header>
+              <ion-card-title>Juegos Populares</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Explora los títulos más buscados y activos en la comunidad.
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card class="Hero-Cards">
+            <ion-card-header>
+              <ion-card-title>Últimas Actualizaciones</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Noticias, parches y actualizaciones recientes de la comunidad.
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card class="Hero-Cards">
+            <ion-card-header>
+              <ion-card-title>Guías y Estrategias</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Consejos, builds y walkthroughs para dominar cada juego.
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- ======= CARDS DINÁMICOS (DESDE API) ========= -->
+    <h2 class="lobotomy-title ion-text-center" style="margin-top:25px;">
+      Recomendaciones para ti
+    </h2>
+
+    <ion-grid>
+      <ion-row>
+
+        <!-- 🔥 Ahora las cards vienen desde tu API tal como en Wikis -->
+        <ion-col size="6" size-md="4" size-lg="3" *ngFor="let game of filterHomeGames()">
+          <ion-card button [routerLink]="['/wiki-detail', game.id]">
+            <img [src]="game.image_url" alt="{{game.title}}" 
+                 style="width:100%; border-radius:10px;">
+
+            <ion-card-content class="ion-text-center lobotomy-title">
+              {{ game.title }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <!-- TEXTO FINAL -->
+    <h2 style="margin-top:20px;">Consejo</h2>
+    <ion-text color="medium">
+      Para estar siempre al día con las actualizaciones de tus juegos favoritos,
+      descarga nuestra aplicación para recibir alertas y parches al instante.
+    </ion-text>
+
+  </div>
+
+</ion-content>
+
+
+<!-- FOOTER EN MÓVIL -->
+<ion-footer *ngIf="isMobile">
+  <ion-toolbar>
+    <app-bottombar></app-bottombar>
+  </ion-toolbar>
+</ion-footer>

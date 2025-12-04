@@ -1,0 +1,38 @@
+<ion-header *ngIf="!isMobile">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div style="padding: 15px;">
+
+    <!-- Buscador -->
+    <ion-searchbar animated="true" placeholder="Buscar juego" [(ngModel)]="searchTerm">
+    </ion-searchbar>
+
+    <ion-grid>
+      <ion-row>
+        <!-- Se imprime lista desde API -->
+        <ion-col size="6" size-md="3" size-lg="3" *ngFor="let juego of filterCards()">
+          <ion-card button [routerLink]="['/wiki-detail', juego.id]">
+            <ion-card-content>
+              <!-- Imagen cargada del API -->
+              <img [src]="juego.image_url" alt="{{juego.title}}" style="width:100%; border-radius:10px;">
+              <h2 class="ion-text-center" style="margin-top:8px;">
+                {{ juego.title }}
+              </h2>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+  </div>
+</ion-content>
+
+<!-- Footer móvil -->
+<ion-footer *ngIf="isMobile">
+  <ion-toolbar>
+    <app-bottombar></app-bottombar>
+  </ion-toolbar>
+</ion-footer>

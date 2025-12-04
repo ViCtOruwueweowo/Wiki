@@ -1,0 +1,16 @@
+ion-tab-bar {
+  --background: #121212; /* color de fondo del tab-bar */
+  --color: #ffffff;      /* color de los iconos y texto inactivo */
+  --color-selected: #4caf50; /* color de los iconos y texto activo */
+  --border: 1px solid #333; /* borde opcional */
+}
+
+ion-tab-button {
+  --padding: 10px;   /* espacio interno */
+  --border-radius: 12px; /* esquinas redondeadas */
+  --transition: 0.3s all; /* transición suave al activar */
+}
+
+ion-tab-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

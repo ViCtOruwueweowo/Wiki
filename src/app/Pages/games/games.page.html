@@ -1,0 +1,81 @@
+<ion-header *ngIf="!isMobile">
+  <app-topbar></app-topbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-categorias">
+
+  <!-- Header condensado -->
+  <ion-header collapse="condense" *ngIf="!isMobile">
+    <ion-toolbar color="light">
+      <ion-title size="large" class="text-center">
+        Gestión de Juegos
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Título principal -->
+  <div class="section-header">
+    <h1 class="page-title text-center">Gestión de Juegos</h1>
+  </div>
+
+  <!-- Botón principal -->
+  <ion-button expand="block" color="primary" class="btn-crear" (click)="crearJuego()">
+    <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+    Crear nuevo juego
+  </ion-button>
+
+  <!-- Lista de juegos -->
+<ion-list class="game-list">
+  <ion-card *ngFor="let juego of juegos" class="game-item">
+
+    <ion-grid>
+      <ion-row>
+
+        <!-- Imagen izquierda -->
+        <ion-col size="2">
+          <img [src]="juego.imagen" alt="imagen del juego" 
+               style="aspect-ratio: 1/1.1; border-radius:10px;">
+        </ion-col>
+
+        <!-- Texto derecha -->
+        <ion-col size="8">
+          <ion-card-header>
+            <ion-card-title>{{ juego.titulo }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p><strong>Desarrollador:</strong> {{ juego.developer }}</p>
+            <p><strong>Categoría:</strong> {{ juego.category }}</p>
+            <p><strong>Plataformas:</strong> {{ juego.plataformas }}</p>
+          </ion-card-content>
+        </ion-col>
+
+    
+<ion-col size="2">
+    <ion-item lines="none">
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="medium" (click)="editarJuego(juego)">
+         Modificar
+        </ion-button>
+
+        <ion-button fill="clear" color="danger" (click)="eliminarJuego(juego)">
+          Eliminar
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+</ion-col>
+     </ion-row>
+    </ion-grid>
+
+  </ion-card>
+</ion-list>
+
+
+
+</ion-content>
+
+<ion-footer *ngIf="isMobile">
+  <ion-toolbar>
+    <app-bottombar></app-bottombar>
+  </ion-toolbar>
+</ion-footer>

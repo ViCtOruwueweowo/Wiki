@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/wikis"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ juego?.title || "Cargando..." }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="juego">
+
+  <div style="padding: 0px; text-align:center">
+    <img [src]="juego.image_url" style="padding-top: 10px;">
+    <h1>{{ juego.title }}</h1>
+    <p>{{ juego.description }}</p>
+
+    <ion-card>
+      <ion-card-content>
+        <p><b>Categoría:</b> {{ juego.category.name }}</p>
+        <p><b>Developer:</b> {{ juego.developer.name }}</p>
+        <p><b>Lanzamiento:</b> {{ juego.release_date }}</p>
+        <p><b>Última actualización:</b> {{ juego.last_update }}</p>
+
+        <p><b>Plataformas:</b></p>
+        <ion-chip *ngFor="let p of juego.platforms">
+          <ion-label>{{ p.name }}</ion-label>
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

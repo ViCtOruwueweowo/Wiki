@@ -1,0 +1,34 @@
+<ion-content [fullscreen]="true">
+  <div class="login-wrapper">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">INICIAR SESIÓN</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label position="floating">CORREO ELECTRONICO</ion-label>
+          <ion-input type="email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">CONTRASEÑA</ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+
+        <!-- 🔥 EL CAPTCHA SE RENDERIZARÁ AUTOMÁTICAMENTE AQUÍ -->
+        <div id="recaptcha-container" style="display:flex; justify-content:center; margin-top:15px;"></div>
+
+        <ion-button expand="block" (click)="login()" [disabled]="!captcha">
+          Ingresar
+        </ion-button>
+
+        <ion-text class="ion-text-center ion-margin-top">
+          <a routerLink="/register">No Tengo Cuenta</a>
+        </ion-text>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
