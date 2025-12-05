@@ -2,35 +2,34 @@
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content fullscreen="true">
-  <div style="padding: 15px;">
+<ion-content [fullscreen]="true" style="--background:#ffffff; font-family: 'Times New Roman', serif; color:#222;">
+  <div style="max-width:1200px; margin:auto; padding:30px 15px;">
 
     <!-- Buscador -->
-    <ion-searchbar animated="true" placeholder="Buscar juego" [(ngModel)]="searchTerm">
+    <ion-searchbar animated="true" placeholder="Buscar juego" [(ngModel)]="searchTerm" style="margin-bottom:25px;">
     </ion-searchbar>
 
+    <!-- LISTA DE JUEGOS -->
     <ion-grid>
-      <ion-row>
-        <!-- Se imprime lista desde API -->
-        <ion-col size="6" size-md="3" size-lg="3" *ngFor="let juego of filterCards()">
-          <ion-card button [routerLink]="['/wiki-detail', juego.id]">
-            <ion-card-content>
-              <!-- Imagen cargada del API -->
-              <img [src]="juego.image_url" alt="{{juego.title}}" style="width:100%; border-radius:10px;">
-              <h2 class="ion-text-center" style="margin-top:8px;">
-                {{ juego.title }}
-              </h2>
+      <ion-row style="margin-top:15px;">
+        <ion-col size="6" size-md="4" size-lg="3" *ngFor="let juego of filterCards()">
+          <ion-card button [routerLink]="['/wiki-detail', juego.id]" style="border:1px solid #ccc; border-radius:6px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.07); transition: transform 0.2s;">
+            
+            <!-- Imagen del juego -->
+<img [src]="juego.image_url" alt="{{juego.title}}" style="width:100%; height:auto; border-bottom:1px solid #ddd; border-top-left-radius:6px; border-top-right-radius:6px;">
+            <!-- Título del juego -->
+            <ion-card-content style="text-align:center; font-size:.92rem; font-weight:600; color:#0c1a2b; margin-top:8px;">
+              {{ juego.title }}
             </ion-card-content>
+
           </ion-card>
         </ion-col>
-
       </ion-row>
     </ion-grid>
 
   </div>
 </ion-content>
 
-<!-- Footer móvil -->
 <ion-footer *ngIf="isMobile">
   <ion-toolbar>
     <app-bottombar></app-bottombar>

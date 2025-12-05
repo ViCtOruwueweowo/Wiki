@@ -3,9 +3,7 @@ import { ModalController, IonButton, IonHeader, IonToolbar, IonTitle, IonContent
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { IonIcon } from '@ionic/angular/standalone';
-import { IonCard, IonCardContent } from '@ionic/angular/standalone';
-
+import { IonIcon, IonCard, IonCardContent } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-crear-categoria',
@@ -29,36 +27,37 @@ import { IonCard, IonCardContent } from '@ionic/angular/standalone';
   ],
   template: `
     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title class="text-center">Ingresar Categoria</ion-title>
+      <ion-toolbar style="background:#f9f9f9; color:#222; font-family:'Times New Roman', serif;">
+        <ion-title style="font-weight:700; font-size:1.5rem;">Ingresar Categoría</ion-title>
+
         <ion-buttons slot="end">
-          <ion-button fill="clear" (click)="dismiss()">
-            <ion-icon name="close-outline"></ion-icon>
+          <ion-button (click)="dismiss()" 
+                      style=" color:gray; border-radius:50%; width:36px; height:36px; padding:0;">
+         X
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
-
-      <ion-card>
+    <ion-content [fullscreen]="true" style="background:#ffffff; font-family:'Times New Roman', serif; color:#222; padding:15px;">
+      <ion-card style="border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08);">
         <ion-card-content>
-          <ion-item fill="outline">
-            <ion-label position="floating">Ingresar Categoria</ion-label>
+
+          <ion-item fill="outline" style="border-radius:8px; margin-bottom:15px;">
+            <ion-label position="floating" style="font-weight:600; color:#0c1a2b;">Ingresar Categoría</ion-label>
             <ion-input [(ngModel)]="name"></ion-input>
           </ion-item>
 
           <ion-button 
             expand="block" 
             shape="round" 
-            color="primary" 
-            class="ion-margin-top"
+            style=" color:#fff; font-weight:600; border-radius:12px;"
             (click)="crear()">
-           Generar Nuevo Registro
+            Generar Nuevo Registro
           </ion-button>
+
         </ion-card-content>
       </ion-card>
-
     </ion-content>
   `
 })
@@ -132,3 +131,4 @@ export class CrearCategoriaComponent {
     this.modalCtrl.dismiss();
   }
 }
+ 

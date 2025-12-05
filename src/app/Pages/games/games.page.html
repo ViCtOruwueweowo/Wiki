@@ -2,73 +2,67 @@
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="page-categorias">
+<ion-content [fullscreen]="true"
+  style="--background:#f9f9f9; font-family:'Times New Roman', serif; color:#222; padding:15px;">
 
-  <!-- Header condensado -->
+  <!-- Header condensado para desktop -->
   <ion-header collapse="condense" *ngIf="!isMobile">
     <ion-toolbar color="light">
-      <ion-title size="large" class="text-center">
-        Gestión de Juegos
-      </ion-title>
+      <ion-title size="large" class="ion-text-center">Gestión de Juegos</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <!-- Título principal -->
-  <div class="section-header">
-    <h1 class="page-title text-center">Gestión de Juegos</h1>
+  <div style="text-align:center; margin-bottom:20px;">
+    <h1 style="font-size:2rem; font-weight:700; color:#0c1a2b;">Gestión de Juegos</h1>
   </div>
 
   <!-- Botón principal -->
-  <ion-button expand="block" color="primary" class="btn-crear" (click)="crearJuego()">
+  <ion-button expand="block" (click)="crearJuego()"
+    style="background:#3b5998; color:#fff; font-weight:600; border-radius:12px; margin-bottom:20px;">
     <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-    Crear nuevo juego
+    Generar Nuevo Registro
   </ion-button>
 
   <!-- Lista de juegos -->
-  <ion-list class="game-list">
-    <ion-card *ngFor="let juego of juegos" class="game-item">
+  <ion-list style="background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08); padding:10px;">
+    <ion-card *ngFor="let juego of juegos"
+      style="border-radius:10px; margin-bottom:12px; box-shadow:0 2px 6px rgba(0,0,0,.05);">
 
       <ion-grid>
         <ion-row>
-
           <!-- Imagen izquierda -->
           <ion-col size="2">
-            <img [src]="juego.imagen" alt="imagen del juego" style="aspect-ratio: 1/1.1; border-radius:10px;">
+            <img [src]="juego.imagen" alt="{{ juego.titulo }}"
+              style="width:100%; height:auto; max-height:150px; object-fit:contain; border-radius:10px;">
           </ion-col>
 
           <!-- Texto derecha -->
-          <ion-col size="10">
+          <ion-col size="9">
             <ion-card-header>
-              <ion-card-title>{{ juego.titulo }}</ion-card-title>
+              <ion-card-title style="font-weight:600; color:#0c1a2b;">{{ juego.titulo }}</ion-card-title>
             </ion-card-header>
 
-            <ion-card-content>
+            <ion-card-content style="font-size:0.95rem; color:#444;">
               <p><strong>Desarrollador:</strong> {{ juego.developer }}</p>
               <p><strong>Categoría:</strong> {{ juego.category }}</p>
               <p><strong>Plataformas:</strong> {{ juego.plataformas }}</p>
-          
-              
-               <p>  <ion-button fill="clear" color="medium" (click)="editarJuego(juego)">
-                    Modificar
-                  </ion-button></p> 
 
-                 <p><ion-button fill="clear" color="danger" (click)="eliminarJuego(juego)">
-                    Eliminar
-                  </ion-button></p> 
-               
-            
+              <div style="margin-top:8px;">
+                <ion-button fill="outline" color="medium" (click)="editarJuego(juego)" style="margin-right:6px;">
+                  Modificar
+                </ion-button>
+                <ion-button fill="outline" color="danger" (click)="eliminarJuego(juego)">
+                  Eliminar
+                </ion-button>
+              </div>
             </ion-card-content>
           </ion-col>
-
-
-
         </ion-row>
       </ion-grid>
 
     </ion-card>
   </ion-list>
-
-
 
 </ion-content>
 

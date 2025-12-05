@@ -28,31 +28,30 @@ import { IonCard, IonCardContent } from '@ionic/angular/standalone';
     HttpClientModule
   ],
   template: `
-     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title class="text-center">Ingresar Plataforma</ion-title>
-        <ion-buttons slot="end">
-          <ion-button fill="clear" (click)="dismiss()">
-            <ion-icon name="close-outline"></ion-icon>
+    <ion-header>
+      <ion-toolbar style="background:#f9f9f9; color:#222; font-family:'Times New Roman', serif;">
+        <ion-title style="font-weight:700; font-size:1.5rem;">Ingresar Plataforma</ion-title>
+         <ion-buttons slot="end">
+          <ion-button (click)="dismiss()" 
+                      style=" color:gray; border-radius:50%; width:36px; height:36px; padding:0;">
+         X
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
-
-      <ion-card>
+    <ion-content [fullscreen]="true" style="background:#ffffff; font-family:'Times New Roman', serif; color:#222; padding:15px;">
+      <ion-card style="border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08);">
         <ion-card-content>
-          <ion-item fill="outline">
-            <ion-label position="floating">Ingresar Plataformar</ion-label>
+          <ion-item fill="outline" style="border-radius:8px; margin-bottom:15px;">
+            <ion-label position="floating" style="font-weight:600; color:#0c1a2b;">Nombre de la Plataforma</ion-label>
             <ion-input [(ngModel)]="name"></ion-input>
           </ion-item>
 
           <ion-button 
             expand="block" 
             shape="round" 
-            color="primary" 
-            class="ion-margin-top"
+            style=" color:#fff; font-weight:600; border-radius:12px;"
             (click)="crear()">
             Generar Nuevo Registro
           </ion-button>

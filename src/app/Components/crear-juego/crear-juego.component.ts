@@ -44,90 +44,87 @@ import { IonIcon, IonCard, IonCardContent } from '@ionic/angular/standalone';
     FormsModule,
     HttpClientModule
   ],
-  template: `
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title class="text-center">Ingresar Juego</ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" (click)="dismiss()">
-        <ion-icon name="close-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+template: `<ion-header>
+  <ion-toolbar style="background:#f9f9f9; color:#222; border-bottom:1px solid #ccc;">
+       <ion-title style="font-weight:700; font-size:1.5rem;">Ingresar Juego</ion-title>
+       <ion-buttons slot="end">
+          <ion-button (click)="dismiss()" 
+                      style=" color:gray; border-radius:50%; width:36px; height:36px; padding:0;">
+         X
+          </ion-button>
+        </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-card>
+<ion-content [fullscreen]="true" style="--background:#f9f9f9; padding:20px; font-family:'Times New Roman', serif; color:#222;">
+  <ion-card style="border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:20px; background:#fff;">
     <ion-card-content>
 
-      <!-- Título -->
-      <ion-item fill="outline">
-        <ion-label position="floating">Título del juego</ion-label>
+      <!-- Título del juego -->
+      <ion-item style="margin-bottom:15px; border:none;">
+        <ion-label position="floating" style="font-weight:600;">Título del juego</ion-label>
         <ion-input [(ngModel)]="title"></ion-input>
       </ion-item>
 
       <!-- Descripción -->
-      <ion-item fill="outline" class="ion-margin-top">
-        <ion-label position="floating">Descripción</ion-label>
-        <ion-textarea autoGrow="true" rows="5" [(ngModel)]="description"></ion-textarea>
+      <ion-item style="margin-bottom:15px; border:none;">
+        <ion-label position="floating" style="font-weight:600;">Descripción</ion-label>
+        <ion-textarea rows="5" autoGrow="true" [(ngModel)]="description"></ion-textarea>
       </ion-item>
 
-      <!-- Última actualización -->
-      <ion-item fill="outline" class="ion-margin-top">
-        <ion-label position="floating">Última actualización</ion-label>
+      <!-- Fechas -->
+      <ion-item style="margin-bottom:15px; border:none;">
+        <ion-label position="floating" style="font-weight:600;">Última actualización</ion-label>
         <ion-input type="date" [(ngModel)]="last_update"></ion-input>
       </ion-item>
 
-      <!-- Fecha lanzamiento -->
-      <ion-item fill="outline" class="ion-margin-top">
-        <ion-label position="floating">Fecha de lanzamiento</ion-label>
+      <ion-item style="margin-bottom:15px; border:none;">
+        <ion-label position="floating" style="font-weight:600;">Fecha de lanzamiento</ion-label>
         <ion-input type="date" [(ngModel)]="release_date"></ion-input>
       </ion-item>
 
       <!-- Imagen -->
-      <ion-item fill="outline" class="ion-margin-top">
-        <ion-label>Imagen del juego</ion-label>
-        <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+      <ion-item style="margin-bottom:15px; border:none;">
+        <ion-label style="font-weight:600;">Imagen del juego</ion-label>
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
       </ion-item>
 
       <!-- Developer -->
-      <ion-item fill="outline" class="ion-margin-top">
-        <ion-label>Desarrollador</ion-label>
+      <ion-item style="margin-bottom:15px; border:none;">
+        <ion-label style="font-weight:600;">Desarrollador</ion-label>
         <ion-select interface="popover" [(ngModel)]="developer_id" placeholder="Seleccione desarrollador">
-          <ion-select-option *ngFor="let dev of developers" [value]="dev.id">
-            {{ dev.nombre }}
-          </ion-select-option>
+          <ion-select-option *ngFor="let dev of developers" [value]="dev.id">{{ dev.nombre }}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <!-- Categoría -->
-      <ion-item fill="outline" class="ion-margin-top">
-        <ion-label>Categoría</ion-label>
+      <ion-item style="margin-bottom:15px; border:none;">
+        <ion-label style="font-weight:600;">Categoría</ion-label>
         <ion-select interface="popover" [(ngModel)]="category_id" placeholder="Seleccione categoría">
-          <ion-select-option *ngFor="let cat of categories" [value]="cat.id">
-            {{ cat.nombre }}
-          </ion-select-option>
+          <ion-select-option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nombre }}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <!-- Plataformas -->
-      <ion-item fill="outline" class="ion-margin-top">
-        <ion-label>Plataformas</ion-label>
+      <ion-item style="margin-bottom:20px; border:none;">
+        <ion-label style="font-weight:600;">Plataformas</ion-label>
         <ion-select multiple="true" interface="popover" [value]="platform_ids" (ionChange)="onPlatformsChange($event)" placeholder="Seleccione plataformas">
-          <ion-select-option *ngFor="let p of platforms" [value]="p.id">
-            {{ p.nombre }}
-          </ion-select-option>
+          <ion-select-option *ngFor="let p of platforms" [value]="p.id">{{ p.nombre }}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <!-- Botón -->
-      <ion-button expand="block" shape="round" color="primary" class="ion-margin-top" (click)="crear()">
+      <!-- Botón principal -->
+      <ion-button expand="block" shape="round" (click)="crear()"
+                  style=" color:#fff; font-weight:600; border-radius:12px;">
         Generar Nuevo Registro
       </ion-button>
+
     </ion-card-content>
   </ion-card>
 </ion-content>
+
 `
+
 })
 export class CrearJuegoComponent implements OnInit {
 

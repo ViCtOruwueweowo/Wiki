@@ -2,101 +2,72 @@
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" style="--background:#ffffff; font-family:'Times New Roman', serif; color:#222;">
+  <div class="page-content" style="max-width:1200px; margin:auto; padding:30px 15px;">
+    <h4 class="ion-text-center" style="font-weight:700; font-size:1.6rem; color:#0c1a2b; margin-bottom:25px;">
+      Gestión Administrativa
+    </h4>
 
-  <ion-grid>
-    <ion-row>
+    <!-- TARJETAS PRINCIPALES -->
+    <ion-grid style="padding:0;">
+      <ion-row style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; margin:0;">
+        <ion-col style="flex:1 1 calc(25% - 10px);" *ngFor="let card of [
+          { title: 'Ir A Juegos', total: gamesTotal, link:'/games' },
+          { title: 'Ir A Categorías', total: categoriesTotal, link:'/category' },
+          { title: 'Ir A Desarrollador', total: developersTotal, link:'/developer' },
+          { title: 'Ir A Plataforma', total: platformsTotal, link:'/platform' }
+        ]">
+          <ion-card button [routerLink]="card.link"
+                    style="border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,.08); background:#fdfdfd; margin-bottom:10px; transition:transform 0.2s;">
+            <ion-card-header>
+              <ion-card-title class="ion-text-center" style="font-weight:600; color:#0c1a2b;">
+                {{ card.title }}
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <h2 class="ion-text-center lobotomy-title" style="font-size:1.6rem; color:#3b5998;">
+                {{ card.total }}
+              </h2>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-      <ion-col size="6" size-md="3">
-        <ion-card button routerLink="/games" style="border-radius: 20px;">
-          <h5 class="ion-text-center">Juegos</h5>
-          <ion-card-content>
-            <h2 class="ion-text-center lobotomy-title">{{ gamesTotal }}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+    <!-- GRÁFICAS GENERALES -->
+    <ion-card style="margin:20px 0; border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center" style="font-weight:700; color:#0c1a2b;">
+          Estadísticas Generales
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content style="height:300px;">
+        <canvas id="statsChart" style="height:100%;"></canvas>
+      </ion-card-content>
+    </ion-card>
 
-      <ion-col size="6" size-md="3">
-        <ion-card button routerLink="/category" style="border-radius: 20px;">
-          <h5 class="ion-text-center">Categorias</h5>
-          <ion-card-content>
-            <h2 class="ion-text-center lobotomy-title">{{ categoriesTotal }}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6" size-md="3">
-        <ion-card button routerLink="/developer" style="border-radius: 20px;">
-          <h5 class="ion-text-center">Desarrollador</h5>
-          <ion-card-content>
-            <h2 class="ion-text-center lobotomy-title">{{ developersTotal }}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6" size-md="3">
-        <ion-card button routerLink="/platform" style="border-radius: 20px;">
-          <h5 class="ion-text-center">Plataforma</h5>
-          <ion-card-content>
-            <h2 class="ion-text-center lobotomy-title">{{ platformsTotal }}</h2>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
-  <div class="page-content">
-    <h4 class="ion-text-center">Gestion Administrativa</h4>
+    <!-- Gráficas individuales -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="3"
+          *ngFor="let chart of ['gamesChart','categoriesChart','developersChart','platformsChart']; let i=index">
+          <ion-card
+            style="border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.08); margin-bottom:20px; height:220px;">
+            <ion-card-header>
+              <ion-card-title class="ion-text-center" style="font-weight:600; color:#0c1a2b;">
+                {{ ['Juegos','Categorías','Desarrolladores','Plataformas'][i] }}
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="height:140px;">
+              <canvas [id]="chart" style="height:100%;"></canvas>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
+</ion-content>
 
-  <!-- Gráfica -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title class="ion-text-center">Estadísticas</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <canvas id="statsChart"></canvas>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-grid>
-    <ion-row>
-
-      <ion-col size="6" size-md="3">
-        <ion-card>
-          <ion-card-header><ion-card-title class="ion-text-center">📊 Juegos</ion-card-title></ion-card-header>
-          <ion-card-content><canvas id="gamesChart" style="height:160px;"></canvas></ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6" size-md="3">
-        <ion-card>
-          <ion-card-header><ion-card-title class="ion-text-center">📊 Categorías</ion-card-title></ion-card-header>
-          <ion-card-content><canvas id="categoriesChart" style="height:160px;"></canvas></ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6" size-md="3">
-        <ion-card>
-          <ion-card-header><ion-card-title class="ion-text-center">📊 Desarrolladores</ion-card-title></ion-card-header>
-          <ion-card-content><canvas id="developersChart" style="height:160px;"></canvas></ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6" size-md="3">
-        <ion-card>
-          <ion-card-header><ion-card-title class="ion-text-center">📊 Plataformas</ion-card-title></ion-card-header>
-          <ion-card-content><canvas id="platformsChart" style="height:160px;"></canvas></ion-card-content>
-        </ion-card>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
-</ion-content> <!-- ← ahora sí correctamente cerrado -->
-
-<!-- Footer en móvil -->
 <ion-footer *ngIf="isMobile">
   <ion-toolbar>
     <app-bottombar></app-bottombar>

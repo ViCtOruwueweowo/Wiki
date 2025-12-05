@@ -7,26 +7,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="juego">
+<ion-content *ngIf="juego" style="--background:#f9f9f9; font-family:'Times New Roman', serif; color:#222;">
+  <div style="padding:15px; max-width:800px; margin:auto; text-align:center;">
 
-  <div style="padding: 0px; text-align:center">
-    <img [src]="juego.image_url" style="padding-top: 10px;">
-    <h1>{{ juego.title }}</h1>
-    <p>{{ juego.description }}</p>
+    <!-- Imagen principal -->
+    <img [src]="juego.image_url" alt="{{ juego.title }}" style="width:100%; max-height:300px; object-fit:contain; border-radius:12px; margin-bottom:15px; 
+            box-shadow:0 4px 10px rgba(0,0,0,.1); background:#f0f0f0;">
 
-    <ion-card>
-      <ion-card-content>
+    <!-- Título y descripción -->
+    <h1 style="font-size:2rem; font-weight:700; color:#0c1a2b; margin-bottom:8px;">{{ juego.title }}</h1>
+    <p style="font-size:1rem; color:#555; line-height:1.5; margin-bottom:20px;">{{ juego.description }}</p>
+
+    <!-- Card de detalles -->
+    <ion-card style="border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,.08); margin-bottom:20px;">
+      <ion-card-content style="text-align:left; font-size:0.95rem; color:#444; line-height:1.5;">
         <p><b>Categoría:</b> {{ juego.category.name }}</p>
         <p><b>Developer:</b> {{ juego.developer.name }}</p>
         <p><b>Lanzamiento:</b> {{ juego.release_date }}</p>
         <p><b>Última actualización:</b> {{ juego.last_update }}</p>
 
         <p><b>Plataformas:</b></p>
-        <ion-chip *ngFor="let p of juego.platforms">
-          <ion-label>{{ p.name }}</ion-label>
-        </ion-chip>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:5px;">
+          <ion-chip *ngFor="let p of juego.platforms" style="background:#e8f0ff; color:#0c1a2b; font-weight:500;">
+            <ion-label>{{ p.name }}</ion-label>
+          </ion-chip>
+        </div>
       </ion-card-content>
     </ion-card>
-  </div>
 
+  </div>
 </ion-content>

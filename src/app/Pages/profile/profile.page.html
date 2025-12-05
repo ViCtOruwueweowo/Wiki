@@ -2,73 +2,77 @@
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="user">
+<ion-content [fullscreen]="true" *ngIf="user" style="--background:#ffffff; font-family:'Times New Roman', serif; color:#222;">
+  <div style="max-width:800px; margin:auto; padding:20px;">
 
-  <ion-card style="margin:15px; border-radius:15px;">
-    <ion-card-header>
-      <ion-card-title class="ion-text-center">
-       Mi Perfil
-      </ion-card-title>
-    </ion-card-header>
+    <!-- PERFIL -->
+    <ion-card style="border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,.08); margin-bottom:25px;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center" style="font-weight:700; font-size:1.5rem; color:#0c1a2b;">
+          Mi Perfil
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
 
-    <ion-card-content>
-
-      <ion-item lines="none">
-        <ion-label><b>Nombre:</b></ion-label>
-       <ion-note style="font-size:16px; font-weight:500;">{{user.first_name}} {{user.last_name}}</ion-note>
-      </ion-item>
-
-      <ion-item lines="none">
-        <ion-label><b>Email:</b></ion-label>
-      <ion-note style="font-size:16px; font-weight:500;">{{user.email}}</ion-note>
-      </ion-item>
-
-      <ion-item lines="none">
-        <ion-label><b>Teléfono:</b></ion-label>
-       <ion-note style="font-size:16px; font-weight:500;">{{user.phone}}</ion-note>
-      </ion-item>
-
-      <ion-item lines="none">
-        <ion-label><b>Estado:</b></ion-label>
-      <ion-note style="font-size:16px; font-weight:500;">{{user.status}}</ion-note>
-      </ion-item>
-
-    </ion-card-content>
-  </ion-card>
- <!-- FAVORITOS -->
-  <ion-card style="margin:15px; border-radius:15px;">
-    <ion-card-header>
-      <ion-card-title> Mis Favoritos</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <div *ngIf="favorites.length === 0">
-        <p>No tienes favoritos aún.</p>
-      </div>
-
-      <ion-list *ngIf="favorites.length > 0">
-        <ion-item *ngFor="let fav of favorites">
-          <ion-label>{{ fav.name }}</ion-label>
+        <ion-item lines="none">
+          <ion-label><b>Nombre:</b></ion-label>
+          <ion-note style="font-size:16px; font-weight:500;">{{user.first_name}} {{user.last_name}}</ion-note>
         </ion-item>
-      </ion-list>
 
-      <ion-button expand="block" color="secondary" (click)="goFav()">
-        Ver Todos / Administrar Favoritos →
+        <ion-item lines="none">
+          <ion-label><b>Email:</b></ion-label>
+          <ion-note style="font-size:16px; font-weight:500;">{{user.email}}</ion-note>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label><b>Teléfono:</b></ion-label>
+          <ion-note style="font-size:16px; font-weight:500;">{{user.phone}}</ion-note>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label><b>Estado:</b></ion-label>
+          <ion-note style="font-size:16px; font-weight:500;">{{user.status}}</ion-note>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!-- FAVORITOS -->
+    <ion-card style="border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,.08); margin-bottom:25px;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center" style="font-weight:600; color:#0c1a2b;">
+          Mis Favoritos
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="favorites.length === 0" style="text-align:center; font-size:1rem; color:#555;">
+          No tienes favoritos aún.
+        </div>
+
+        <ion-list *ngIf="favorites.length > 0">
+          <ion-item *ngFor="let fav of favorites" style="border-radius:8px; margin-bottom:8px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.05);">
+            <ion-label>{{ fav.name }}</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <ion-button expand="block" fill="outline" color="primary" style="margin-top:15px; border-radius:12px;" (click)="goFav()">
+          Ver Todos / Administrar Favoritos →
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- BOTONES DE ACCIÓN -->
+    <div style="padding:10px 0; display:flex; flex-direction:column; gap:12px;">
+   <!--   <ion-button expand="block" shape="round" color="primary" style="font-weight:600;" (click)="update()">
+        Actualizar Perfil
+      </ion-button> -->
+
+      <ion-button expand="block" shape="round" color="danger" style="font-weight:600;" (click)="logout()">
+        Cerrar Sesión
       </ion-button>
-    </ion-card-content>
-  </ion-card>
+    </div>
 
-  <div style="padding:20px;text-align:center;">
-    <ion-button expand="block" (click)="update()" shape="round" color="primary">
-      Actualizar Perfil
-    </ion-button>
-
-    <ion-button expand="block" color="danger" shape="round" (click)="logout()">
-      Cerrar Sesión
-    </ion-button>
   </div>
-
- 
 </ion-content>
 
 <!-- FOOTER SOLO EN MÓVIL -->

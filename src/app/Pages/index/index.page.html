@@ -2,91 +2,90 @@
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" style="--background:#ffffff; font-family: 'Times New Roman', serif; color:#222;">
 
-  <!-- HEADER SOLO EN PC -->
-  <ion-header collapse="condense" *ngIf="!isMobile">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- HERO PRINCIPAL -->
+  <div style="text-align:center; padding:40px 15px; border-bottom:2px solid #ccc;">
+    <h1 style="font-size:2.3rem; font-weight:700; margin:0; color:#0c1a2b;">Universal Wiki Utopia</h1>
+    <p style="margin-top:8px; font-size:1rem; color:#555;">
+      La enciclopedia de referencia para jugadores y desarrolladores
+    </p>
+  </div>
 
-  <div class="page-content" style="padding: 10px;">
+  <div style="max-width:1200px; margin:auto; padding:30px 15px;">
 
-    <!-- ---------- HERO CARDS ESTÁTICAS ---------- -->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12" size-md="6" size-lg="4">
-          <ion-card class="Hero-Cards">
-            <ion-card-header>
-              <ion-card-title>Juegos Populares</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              Explora los títulos más buscados y activos en la comunidad.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
+    <!-- SECCIONES DESTACADAS -->
+    <section style="margin-bottom:50px;">
+      <h2 style="font-size:1.6rem; color:#0c1a2b; border-left:4px solid #3b5998; padding-left:12px; font-weight:600;">
+        Secciones Destacadas
+      </h2>
+      <ion-grid>
+        <ion-row style="margin-top:20px;">
 
-        <ion-col size="12" size-md="6" size-lg="4">
-          <ion-card class="Hero-Cards">
-            <ion-card-header>
-              <ion-card-title>Últimas Actualizaciones</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              Noticias, parches y actualizaciones recientes de la comunidad.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
+          <ion-col size="12" size-md="6" size-lg="4">
+            <ion-card button style="border:1px solid #ccc; border-radius:6px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.07); transition:transform 0.2s;">
+              <ion-card-header style="border-bottom:1px solid #ddd;">
+                <ion-card-title style="font-weight:600; font-size:1.05rem; color:#0c1a2b;">Juegos Populares</ion-card-title>
+              </ion-card-header>
+              <ion-card-content style="font-size:.9rem; color:#444;">Explora los títulos más buscados por la comunidad y jugadores activos.</ion-card-content>
+            </ion-card>
+          </ion-col>
 
-        <ion-col size="12" size-md="6" size-lg="4">
-          <ion-card class="Hero-Cards">
-            <ion-card-header>
-              <ion-card-title>Guías y Estrategias</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              Consejos, builds y walkthroughs para dominar cada juego.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+          <ion-col size="12" size-md="6" size-lg="4">
+            <ion-card button style="border:1px solid #ccc; border-radius:6px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.07);">
+              <ion-card-header style="border-bottom:1px solid #ddd;">
+                <ion-card-title style="font-weight:600; font-size:1.05rem; color:#0c1a2b;">Últimas Actualizaciones</ion-card-title>
+              </ion-card-header>
+              <ion-card-content style="font-size:.9rem; color:#444;">Notas, parches y noticias recientes de cada juego documentadas.</ion-card-content>
+            </ion-card>
+          </ion-col>
 
-    <!-- ======= CARDS DINÁMICOS (DESDE API) ========= -->
-    <h2 class="lobotomy-title ion-text-center" style="margin-top:25px;">
-      Recomendaciones para ti
-    </h2>
+          <ion-col size="12" size-md="6" size-lg="4">
+            <ion-card button style="border:1px solid #ccc; border-radius:6px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.07);">
+              <ion-card-header style="border-bottom:1px solid #ddd;">
+                <ion-card-title style="font-weight:600; font-size:1.05rem; color:#0c1a2b;">Guías y Estrategias</ion-card-title>
+              </ion-card-header>
+              <ion-card-content style="font-size:.9rem; color:#444;">Walkthroughs, builds y tips para dominar tus juegos favoritos.</ion-card-content>
+            </ion-card>
+          </ion-col>
 
-    <ion-grid>
-      <ion-row>
+        </ion-row>
+      </ion-grid>
+    </section>
 
-        <!-- 🔥 Ahora las cards vienen desde tu API tal como en Wikis -->
-        <ion-col size="6" size-md="4" size-lg="3" *ngFor="let game of filterHomeGames()">
-          <ion-card button [routerLink]="['/wiki-detail', game.id]" >
-            <img [src]="game.image_url" alt="{{game.title}}" 
-                 style="width:100%; border-radius:10px;">
+    <!-- RECOMENDACIONES DINÁMICAS -->
+    <section style="margin-bottom:50px;">
+      <h2 style="font-size:1.6rem; color:#0c1a2b; border-left:4px solid #3b5998; padding-left:12px; font-weight:600;">
+        Recomendaciones para ti
+      </h2>
 
-            <ion-card-content class="ion-text-center lobotomy-title" >
-              {{ game.title }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
+      <ion-grid>
+        <ion-row style="margin-top:15px;">
+          <ion-col size="6" size-md="4" size-lg="3" *ngFor="let game of filterHomeGames()">
+            <ion-card button [routerLink]="['/wiki-detail', game.id]" style="border:1px solid #ccc; border-radius:6px; background:#fff; box-shadow:0 2px 5px rgba(0,0,0,.05); transition: transform 0.2s;">
+              <img [src]="game.image_url" alt="{{game.title}}"  style="width:100%; height:250px; border-bottom:1px solid #ddd; border-top-left-radius:6px; border-top-right-radius:6px;">
+              <ion-card-content style="text-align:center; font-size:.92rem; font-weight:600; color:#0c1a2b; margin-top:8px;">
+                {{ game.title }}
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
 
-      </ion-row>
-    </ion-grid>
-
-    <!-- TEXTO FINAL -->
-    <h2 style="margin-top:20px;">Consejo</h2>
-    <ion-text color="medium">
-      Para estar siempre al día con las actualizaciones de tus juegos favoritos,
-      descarga nuestra aplicación para recibir alertas y parches al instante.
-    </ion-text>
+    <!-- SECCIÓN FINAL -->
+    <section style="margin-top:40px; border-top:1px solid #ccc; padding-top:25px;">
+      <h3 style="font-size:1.1rem; color:#0c1a2b; font-weight:600; margin-bottom:6px;">Nota Informativa</h3>
+      <p style="font-size:.9rem; color:#444; line-height:1.55;">
+        Mantente al día con los parches y novedades de tus juegos favoritos. 
+        Usa la aplicación para recibir alertas, noticias y contenido exclusivo de manera inmediata.
+      </p>
+    </section>
 
   </div>
 
 </ion-content>
 
-
-<!-- FOOTER EN MÓVIL -->
 <ion-footer *ngIf="isMobile">
   <ion-toolbar>
     <app-bottombar></app-bottombar>

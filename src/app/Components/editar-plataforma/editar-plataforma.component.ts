@@ -8,23 +8,36 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   selector: 'app-editar-plataforma',
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, HttpClientModule],
-  template: `
+  template:  `
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Editar Plataforma</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="dismiss()">Cerrar</ion-button>
+      <ion-toolbar style="background:#f9f9f9; color:#222; font-family:'Times New Roman', serif;">
+        <ion-title style="font-weight:700; font-size:1.5rem;">Editar Plataforma</ion-title>
+       <ion-buttons slot="end">
+          <ion-button (click)="dismiss()" 
+                      style=" color:gray; border-radius:50%; width:36px; height:36px; padding:0;">
+         X
+          </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
-      <ion-item>
-        <ion-label position="floating">Nombre de la plataforma</ion-label>
-        <ion-input [(ngModel)]="categoria.nombre"></ion-input>
-      </ion-item>
+    <ion-content [fullscreen]="true" style="background:#ffffff; font-family:'Times New Roman', serif; color:#222; padding:15px;">
+      <ion-card style="border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08);">
+        <ion-card-content>
+          <ion-item fill="outline" style="border-radius:8px; margin-bottom:15px;">
+            <ion-label position="floating" style="font-weight:600; color:#0c1a2b;">Nombre de la Plataforma</ion-label>
+            <ion-input [(ngModel)]="categoria.nombre"></ion-input>
+          </ion-item>
 
-      <ion-button expand="block" color="warning" (click)="editar()">Guardar Cambios</ion-button>
+          <ion-button 
+            expand="block" 
+            shape="round" 
+            style=" color:#fff; font-weight:600; border-radius:12px;"
+            (click)="editar()">
+            Guardar Cambios
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
     </ion-content>
   `
 })

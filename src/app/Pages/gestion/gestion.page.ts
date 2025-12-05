@@ -106,11 +106,11 @@ export class GestionPage implements OnInit {
         datasets:[{
           label:'',
           data:[this.gamesTotal,this.categoriesTotal,this.developersTotal,this.platformsTotal],
-          backgroundColor:'rgba(52,152,219,0.65)',
-          borderColor:'#3498db',
+          backgroundColor:'#3b5998',
+          borderColor:'#27ae60',
           borderWidth:1,
           borderRadius:12,
-          hoverBackgroundColor:'#2980b9'
+          hoverBackgroundColor:'#4B0082'
         }]
       },
       options:{
@@ -139,11 +139,11 @@ export class GestionPage implements OnInit {
           datasets:[{
             label:`Total de ${title}`,
             data:[value],
-            backgroundColor:'rgba(46,204,113,0.6)',
+            backgroundColor:'#3b5998',
             borderColor:'#27ae60',
             borderWidth:1,
             borderRadius:10,
-            hoverBackgroundColor:'#229954'
+            hoverBackgroundColor:'#8000dbff'
           }]
         },
         options:{ responsive:true, maintainAspectRatio:false }

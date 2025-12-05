@@ -2,42 +2,42 @@
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="page-categorias">
+<ion-content [fullscreen]="true" style="--background:#f9f9f9; font-family:'Times New Roman', serif; color:#222; padding:15px;">
 
-  <!-- Header condensado -->
+  <!-- Header condensado para desktop -->
   <ion-header collapse="condense" *ngIf="!isMobile">
     <ion-toolbar color="light">
-      <ion-title size="large" class="text-center">
-        Gestión de Categorías
-      </ion-title>
+      <ion-title size="large" class="ion-text-center">Gestión de Desarrolladores</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <!-- Título principal -->
-  <div class="section-header">
-    <h1 class="page-title text-center">Gestión de Desarrolladores</h1>
+  <div style="text-align:center; margin-bottom:20px;">
+    <h1 style="font-size:2rem; font-weight:700; color:#0c1a2b;">Gestión de Desarrolladores</h1>
   </div>
 
   <!-- Botón principal -->
-  <ion-button expand="block" color="primary" class="btn-crear" (click)="crearCategoria()">
+  <ion-button expand="block" (click)="crearCategoria()" 
+              style="background:#3b5998; color:#fff; font-weight:600; border-radius:12px; margin-bottom:20px;">
     <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-    Crear nuevo desarrollador
+    Generar Nuevo Registro
   </ion-button>
 
-  <!-- Lista de categorías -->
-  <ion-list class="category-list">
-    <ion-item *ngFor="let categoria of categorias" class="category-item">
+  <!-- Lista de desarrolladores -->
+  <ion-list style="background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08); padding:10px;">
+    <ion-item *ngFor="let desarrollador of categorias" 
+              style="border-bottom:1px solid #eee; border-radius:8px; margin-bottom:8px;">
       <ion-label>
-        <h2 class="category-name">{{ categoria.nombre }}</h2>
+        <h2 style="font-weight:600; color:#0c1a2b;">{{ desarrollador.nombre }}</h2>
       </ion-label>
 
       <ion-buttons slot="end">
-        <ion-button fill="clear" color="medium" (click)="editarCategoria(categoria)">
-         Modificar
+        <ion-button fill="outline" color="medium" (click)="editarCategoria(desarrollador)" style="margin-right:5px;">
+          Modificar
         </ion-button>
 
-        <ion-button fill="clear" color="danger" (click)="eliminarCategoria(categoria)">
-         Eliminar
+        <ion-button fill="outline" color="danger" (click)="eliminarCategoria(desarrollador)">
+          Eliminar
         </ion-button>
       </ion-buttons>
     </ion-item>

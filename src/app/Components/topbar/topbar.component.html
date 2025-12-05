@@ -1,23 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" style="--background: #ffffff; box-shadow:0 2px 5px rgba(0,0,0,.08);">
+  <ion-toolbar style="--ion-color-base: #0c1a2b; font-family:'Times New Roman', serif;">
+    
+    <!-- Logo o título opcional -->
+    <ion-title style="font-weight:700; font-size:1.3rem; color:#0c1a2b;">
+      Universal Wiki Utopia
+    </ion-title>
 
     <ion-buttons slot="end">
 
-      <ion-button routerLink="/">Inicio</ion-button>
+      <ion-button routerLink="/" fill="clear" style="font-weight:600; color:#0c1a2b;">Inicio</ion-button>
 
       <!-- Mostrar Login solo si NO hay userRole -->
-      <ion-button *ngIf="!userRole" routerLink="/login">Login</ion-button>
+      <ion-button *ngIf="!userRole" routerLink="/login" fill="clear" style="font-weight:600; color:#0c1a2b;">Login</ion-button>
 
-      <ion-button routerLink="/wikis">Wikis</ion-button>
+      <ion-button routerLink="/wikis" fill="clear" style="font-weight:600; color:#0c1a2b;">Wikis</ion-button>
 
       <!-- Mostrar favoritos solo si existe userRole -->
-      <ion-button *ngIf="userRole" routerLink="/favorites">Favoritos</ion-button>
+      <ion-button *ngIf="userRole" routerLink="/favorites" fill="clear" style="font-weight:600; color:#0c1a2b;">Favoritos</ion-button>
 
       <!-- Gestión solo si userRole == 'admin' -->
-      <ion-button *ngIf="userRole === 'admin'" routerLink="/gestion">Gestion</ion-button>
+      <ion-button *ngIf="userRole === 'admin'" routerLink="/gestion" fill="clear" style="font-weight:600; color:#0c1a2b;">Gestion</ion-button>
 
       <!-- Perfil si hay sesión -->
-      <ion-button *ngIf="userRole" routerLink="/profile">Yo</ion-button>
+      <ion-button *ngIf="userRole" routerLink="/profile" fill="clear" style="font-weight:600; color:#0c1a2b;">Yo</ion-button>
 
     </ion-buttons>
   </ion-toolbar>

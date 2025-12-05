@@ -1,31 +1,36 @@
-<ion-content [fullscreen]="true">
- <div class="login-wrapper">
-    <ion-card class="lobotomy-card">
+<ion-content [fullscreen]="true" style="--background:#f9f9f9; font-family:'Times New Roman', serif; color:#222;">
+  <div class="login-wrapper" style="padding:15px; max-width:400px; margin:auto;">
+
+    <ion-card class="lobotomy-card" style="border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,.08);">
       <ion-card-header>
-        <ion-card-title class="lobotomy-title ion-text-center">
+        <ion-card-title class="lobotomy-title ion-text-center" style="font-size:1.5rem; font-weight:700; color:#0c1a2b;">
           CÓDIGO DE SEGURIDAD
         </ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <ion-item class="lobotomy-item">
+        <!-- Input del código -->
+        <ion-item class="lobotomy-item" style="margin-bottom:15px;">
           <ion-input
             type="text"
             inputmode="numeric"
             maxlength="6"
             [(ngModel)]="code"
             placeholder="000000"
-            class="lobotomy-input">
+            style="text-align:center; font-size:1.2rem; font-weight:500; letter-spacing:4px; border-radius:8px; background:#fff; box-shadow: inset 0 1px 3px rgba(0,0,0,.1);">
           </ion-input>
         </ion-item>
 
+        <!-- Botón -->
         <ion-button
           expand="block"
           (click)="verifyCode()"
-          class="lobotomy-button ion-margin-top">
+          class="lobotomy-button ion-margin-top"
+          style="background:#3b5998; color:#fff; font-weight:600; border-radius:10px;">
           Ingresar
         </ion-button>
       </ion-card-content>
     </ion-card>
+
   </div>
 </ion-content>

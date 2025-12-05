@@ -1,61 +1,64 @@
-<ion-content [fullscreen]="true">
-  <div class="login-wrapper">
-    <ion-card class="lobotomy-card">
+<ion-content [fullscreen]="true" style="--background:#f9f9f9; font-family:'Times New Roman', serif; color:#222;">
+  <div style="display:flex; justify-content:center; align-items:center; padding:20px; min-height:100%;">
+
+    <ion-card style="width:100%; max-width:450px; border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,.1);">
+      
       <ion-card-header>
-        <h2 class="lobotomy-title ion-text-center"><b>¡Únete a Nosotros!</b></h2>
-        <h5 class="ion-text-center">Crea tu cuenta y se parte de nuestra familia</h5>
+        <h2 class="ion-text-center" style="font-weight:700; font-size:1.6rem; color:#0c1a2b;">¡Únete a Nosotros!</h2>
+        <h5 class="ion-text-center" style="font-weight:400; color:#555;">Crea tu cuenta y sé parte de nuestra familia</h5>
       </ion-card-header>
 
-      <ion-card-content>
-        <!-- 🔹 Nombre -->
-        <ion-item class="lobotomy-item" [class.invalid]="isNameInvalid()">
-          <ion-label position="floating" class="lobotomy-label">Nombre(s)</ion-label>
-          <ion-input type="text" class="lobotomy-input" [(ngModel)]="first_name" required></ion-input>
+      <ion-card-content style="padding:20px;">
+        <!-- Nombre -->
+        <ion-item style="margin-bottom:12px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.05);" [class.invalid]="isNameInvalid()">
+          <ion-label position="floating">Nombre(s)</ion-label>
+          <ion-input type="text" [(ngModel)]="first_name" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isNameInvalid()">
-          <p class="ion-padding-start">El nombre debe tener solo letras y al menos 2 caracteres.</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">El nombre debe tener solo letras y al menos 2 caracteres.</p>
         </ion-text>
 
-        <!-- 🔹 Apellido -->
-        <ion-item class="lobotomy-item" [class.invalid]="isLastNameInvalid()">
-          <ion-label position="floating" class="lobotomy-label">Apellido(s)</ion-label>
-          <ion-input type="text" class="lobotomy-input" [(ngModel)]="last_name" required></ion-input>
+        <!-- Apellido -->
+        <ion-item style="margin-bottom:12px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.05);" [class.invalid]="isLastNameInvalid()">
+          <ion-label position="floating">Apellido(s)</ion-label>
+          <ion-input type="text" [(ngModel)]="last_name" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isLastNameInvalid()">
-          <p class="ion-padding-start">El apellido debe tener solo letras y al menos 2 caracteres.</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">El apellido debe tener solo letras y al menos 2 caracteres.</p>
         </ion-text>
 
-        <!-- 🔹 Teléfono -->
-        <ion-item class="lobotomy-item" [class.invalid]="isPhoneInvalid()">
-          <ion-label position="floating" class="lobotomy-label">Teléfono</ion-label>
-          <ion-input type="tel" inputmode="numeric" class="lobotomy-input" [(ngModel)]="phone" required></ion-input>
+        <!-- Teléfono -->
+        <ion-item style="margin-bottom:12px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.05);" [class.invalid]="isPhoneInvalid()">
+          <ion-label position="floating">Teléfono</ion-label>
+          <ion-input type="tel" inputmode="numeric" [(ngModel)]="phone" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isPhoneInvalid()">
-          <p class="ion-padding-start">Debe contener solo números (8-15 dígitos).</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">Debe contener solo números (8-15 dígitos).</p>
         </ion-text>
 
-        <!-- 🔹 Correo -->
-        <ion-item class="lobotomy-item" [class.invalid]="isEmailInvalid()">
-          <ion-label position="floating" class="lobotomy-label">Correo electrónico</ion-label>
-          <ion-input type="email" class="lobotomy-input" [(ngModel)]="email" required></ion-input>
+        <!-- Correo -->
+        <ion-item style="margin-bottom:12px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.05);" [class.invalid]="isEmailInvalid()">
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input type="email" [(ngModel)]="email" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isEmailInvalid()">
-          <p class="ion-padding-start">Ingresa un correo electrónico válido.</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">Ingresa un correo electrónico válido.</p>
         </ion-text>
 
-        <!-- 🔹 Contraseña -->
-        <ion-item class="lobotomy-item" [class.invalid]="isPasswordInvalid()">
-          <ion-label position="floating" class="lobotomy-label">Contraseña</ion-label>
-          <ion-input type="password" class="lobotomy-input" [(ngModel)]="password" required></ion-input>
+        <!-- Contraseña -->
+        <ion-item style="margin-bottom:12px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.05);" [class.invalid]="isPasswordInvalid()">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="password" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isPasswordInvalid()">
-          <p class="ion-padding-start">Debe tener al menos 6 caracteres.</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">Debe tener al menos 6 caracteres.</p>
         </ion-text>
 
-        <!-- 🔹 Botón -->
+        <!-- Botón -->
         <ion-button
           expand="block"
-          class="lobotomy-button ion-margin-top"
+          color="primary"
+          style="border-radius:12px; font-weight:600; margin-top:15px;"
           (click)="register()"
           [disabled]="
             !first_name ||
@@ -72,7 +75,9 @@
         >
           Registrarme
         </ion-button>
+
       </ion-card-content>
     </ion-card>
+
   </div>
 </ion-content>

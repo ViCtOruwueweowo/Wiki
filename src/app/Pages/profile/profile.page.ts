@@ -8,15 +8,17 @@ import { TopbarComponent } from 'src/app/Components/topbar/topbar.component';
 import { BottombarComponent } from 'src/app/Components/bottombar/bottombar.component';
 import { RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
+
     IonicModule,
     RouterLink,
-    CommonModule,HttpClientModule ,
+    CommonModule, HttpClientModule,
     FormsModule,
     TopbarComponent,
     BottombarComponent
@@ -26,15 +28,15 @@ export class ProfilePage implements OnInit {
 
   isMobile: boolean = false;
 
-  user:any = null;
-  favorites:any[] = [];
+  user: any = null;
+  favorites: any[] = [];
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private toast: ToastController,
     private loading: LoadingController
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.checkScreen();
@@ -42,77 +44,76 @@ export class ProfilePage implements OnInit {
   }
 
   @HostListener('window:resize')
-  onResize(){ this.checkScreen(); }
+  onResize() { this.checkScreen(); }
 
-  checkScreen(){ this.isMobile = window.innerWidth <= 768; }
+  checkScreen() { this.isMobile = window.innerWidth <= 768; }
 
   // OBTENER PERFIL DESDE TU API
-async getMyProfile(){
+  async getMyProfile() {
 
-  const token = localStorage.getItem("authToken"); // <<--- Debe existir desde tu login
+    const token = localStorage.getItem("authToken"); // <<--- Debe existir desde tu login
 
-  if(!token){
-    console.error("No existe token, no puedes autenticarte");
-    this.router.navigate(['/login']);
-    return;
-  }
+    if (!token) {
+      console.error("No existe token, no puedes autenticarte");
+      this.router.navigate(['/']);
+      return;
+    }
 
-  const headers = { 
-    'Authorization': `Bearer ${token}` 
-  };
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
 
-  this.http.get("http://127.0.0.1:8000/api/my-profile", { headers })
-    .subscribe((res:any)=>{
-      this.user = res.data;
-      this.favorites = []; // si luego agregas favoritos
-    },
-    err=>{
-      console.error("Error ->",err);
-      if(err.status === 401) this.router.navigate(['/login']);
-    });
-}
-
-async logout(){
-
-  const token = localStorage.getItem("authToken"); // ⚠ este es tu token real
-
-  if(!token){
-    this.router.navigate(['/login']);
-    return;
-  }
-
-  const headers = { Authorization: `Bearer ${token}` };
-
-  this.http.post("http://127.0.0.1:8000/api/logout", {}, { headers })
-    .subscribe({
-      next: async (res:any)=>{
-        
-        localStorage.removeItem("authToken"); // << ahora correcto
-        const t = await this.toast.create({
-          message:"Cerraste sesión correctamente",
-          duration:2000,
-          color:"success"
-        });
-        t.present();
-        this.router.navigate(['/']);
+    this.http.get("http://127.0.0.1:8000/api/my-profile", { headers })
+      .subscribe((res: any) => {
+        this.user = res.data;
+        this.favorites = []; // si luego agregas favoritos
       },
-      error: async(err)=>{
-        const t = await this.toast.create({
-          message:"Error al cerrar sesión",
-          duration:2000,
-          color:"danger"
+        err => {
+          console.error("Error ->", err);
+          if (err.status === 401) this.router.navigate(['/']);
         });
-        t.present();
-      }
-    })
-}
+  }
 
+  async logout() {
+    const token = localStorage.getItem("authToken");
 
-  update(){
+    // Crear headers solo si existe token
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+
+    this.http.post("http://127.0.0.1:8000/api/logout", {}, { headers })
+      .subscribe({
+        next: async (res: any) => {
+          localStorage.clear();
+
+          const t = await this.toast.create({
+            message: "Cerraste sesión correctamente",
+            duration: 2000,
+            color: "success"
+          });
+          t.present();
+
+          this.router.navigate(['/']);
+        },
+        error: async (err) => {
+          localStorage.clear();
+
+          const t = await this.toast.create({
+            message: "Error al cerrar sesión",
+            duration: 2000,
+            color: "danger"
+          });
+          t.present();
+
+          this.router.navigate(['/']);
+        }
+      });
+  }
+
+  update() {
     this.router.navigate(['/update-profile']); // futura pantalla para edición
   }
 
-  goFav(){
+  goFav() {
     this.router.navigate(['/favorites']);
   }
 
