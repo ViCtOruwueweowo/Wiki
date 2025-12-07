@@ -90,10 +90,11 @@ async cargarJuegos() {
 
     modal.onDidDismiss().then((data) => {
       if (data.data?.id) {
-        this.juegos.push({
-          id: data.data.id,
-          nombre: data.data.title
-        });
+   this.juegos.push({
+  id: data.data.id,
+  titulo: data.data.title
+});
+
       }
     });
 
@@ -118,43 +119,53 @@ async cargarJuegos() {
   }
 
   // ================= ELIMINAR JUEGO ================= //
-  async eliminarJuego(juego: any) {
-    const alert = await this.alertCtrl.create({
-      header: 'Confirmar eliminación',
-      message: `¿Deseas eliminar a <b>${juego.nombre}</b>?`,
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        { text: 'Eliminar', role: 'confirm', handler: () => this.confirmDeleteJuego(juego) }
-      ]
-    });
+ async eliminarJuego(juego: any) {
+  const alert = await this.alertCtrl.create({
+    header: 'Confirmar eliminación',
+    message: `¿Deseas eliminar a "${juego.titulo}"?`,
+    buttons: [
+      { text: 'Cancelar', role: 'cancel' },
+      { text: 'Eliminar', role: 'confirm', handler: () => this.confirmDeleteJuego(juego) }
+    ]
+  });
 
-    await alert.present();
-  }
+  await alert.present();
+}
 
-  async confirmDeleteJuego(juego: any) {
-    const token = localStorage.getItem('authToken');
-    const loading = await this.loadingCtrl.create({ message: 'Eliminando juego...' });
-    await loading.present();
 
-    this.http.delete(`http://127.0.0.1:8000/api/games1/deactivate/${juego.id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).subscribe({
-      next: async (res: any) => {
-        await loading.dismiss();
+ async confirmDeleteJuego(juego: any) {
+  const token = localStorage.getItem('authToken');
 
-        if (res.success) {
-          this.juegos = this.juegos.filter((g) => g.id !== juego.id);
-          this.showToast('Juego eliminado correctamente', 'success');
-        } else {
-          this.showToast('Error al eliminar juego', 'danger');
-        }
-      },
-      error: async () => {
-        await loading.dismiss();
-        this.showToast('Error al eliminar juego', 'danger');
+  // Mostrar loader
+  const loading = await this.loadingCtrl.create({ message: 'Desactivando juego...' });
+  await loading.present();
+
+  // Llamada PUT al backend
+  this.http.put(
+    `http://127.0.0.1:8000/api/games1/games/deactivate/${juego.id}`,
+    {}, // Body vacío
+    { headers: { Authorization: `Bearer ${token}` } } // Headers correctos
+  ).subscribe({
+    next: async (res: any) => {
+      await loading.dismiss();
+
+      if (res.success) {
+        // Remover juego de la lista local
+        this.juegos = this.juegos.filter((g) => g.id !== juego.id);
+        this.showToast('Juego desactivado correctamente', 'success');
+      } else {
+        this.showToast(res.message || 'Error al desactivar juego', 'danger');
       }
-    });
-  }
+    },
+    error: async (err) => {
+      await loading.dismiss();
+      let mensaje = 'Error al desactivar juego';
+      if (err.error?.message) mensaje = err.error.message; // Mostrar mensaje del backend si existe
+      this.showToast(mensaje, 'danger');
+    }
+  });
+}
+
 
   // ================= TOAST ================= //
   async showToast(message: string, color: string) {

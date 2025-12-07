@@ -10,9 +10,6 @@
 
       <ion-button routerLink="/" fill="clear" style="font-weight:600; color:#0c1a2b;">Inicio</ion-button>
 
-      <!-- Mostrar Login solo si NO hay userRole -->
-      <ion-button *ngIf="!userRole" routerLink="/login" fill="clear" style="font-weight:600; color:#0c1a2b;">Login</ion-button>
-
       <ion-button routerLink="/wikis" fill="clear" style="font-weight:600; color:#0c1a2b;">Wikis</ion-button>
 
       <!-- Mostrar favoritos solo si existe userRole -->
@@ -23,6 +20,8 @@
 
       <!-- Perfil si hay sesión -->
       <ion-button *ngIf="userRole" routerLink="/profile" fill="clear" style="font-weight:600; color:#0c1a2b;">Yo</ion-button>
+      <!-- Mostrar Login solo si NO hay userRole -->
+      <ion-button *ngIf="!userRole" routerLink="/login" fill="clear" style="font-weight:600; color:#0c1a2b;">Iniciar</ion-button>
 
     </ion-buttons>
   </ion-toolbar>

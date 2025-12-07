@@ -6,11 +6,7 @@
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
-    <!-- SOLO si NO hay sesión -->
-    <ion-tab-button *ngIf="!userRole" routerLink="/login">
-      <ion-icon name="log-in-outline"></ion-icon>
-      <ion-label>Login</ion-label>
-    </ion-tab-button>
+
 
     <ion-tab-button routerLink="/wikis">
       <ion-icon name="book-outline"></ion-icon>
@@ -35,5 +31,10 @@
       <ion-label>Yo</ion-label>
     </ion-tab-button>
 
+        <!-- SOLO si NO hay sesión -->
+    <ion-tab-button *ngIf="!userRole" routerLink="/login">
+      <ion-icon name="log-in-outline"></ion-icon>
+      <ion-label>Iniciar</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
