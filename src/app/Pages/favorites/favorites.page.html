@@ -12,15 +12,10 @@
   <div style="text-align:center; margin-top:50px;">
     <ion-icon name="finger-print-outline" style="font-size: 60px; color: #3880ff;"></ion-icon>
     <h2>Autenticación requerida</h2>
-    <p>Coloca tu huella o utiliza Face ID para acceder a Favorites.</p>
-
+    <p>Coloca tu huella, Face ID o ingresa el PIN.</p>
     <p *ngIf="!isWebAuthnSupported" style="color:red;">
-      Tu navegador no soporta autenticación biométrica.
+      Biometría no soportada en este navegador. Se usará PIN.
     </p>
-
-    <ion-button *ngIf="isWebAuthnSupported" (click)="authenticateWithWebAuthn()" color="primary" style="margin-top:20px;">
-      Intentar autenticación
-    </ion-button>
   </div>
 </ion-content>
 
