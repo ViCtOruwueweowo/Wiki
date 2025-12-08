@@ -1,4 +1,4 @@
-<ion-header [hidden]="isMobile">
+<ion-header *ngIf="!isMobile">
   <app-topbar></app-topbar>
 </ion-header>
 
@@ -26,32 +26,40 @@
       <h2>Secciones Destacadas</h2>
       <ion-grid>
         <ion-row>
+
           <ion-col size="12" size-md="6" size-lg="4">
-            <ion-card button class="card">
-              <ion-card-header>
+            <ion-card button class="highlight-card">
+              <ion-card-header class="card-header">
                 <ion-card-title>Juegos Populares</ion-card-title>
               </ion-card-header>
-              <ion-card-content>Explora los títulos más buscados por la comunidad y jugadores activos.</ion-card-content>
+              <ion-card-content class="card-content">
+                Explora los títulos más buscados por la comunidad y jugadores activos.
+              </ion-card-content>
             </ion-card>
           </ion-col>
 
           <ion-col size="12" size-md="6" size-lg="4">
-            <ion-card button class="card">
-              <ion-card-header>
+            <ion-card button class="highlight-card">
+              <ion-card-header class="card-header">
                 <ion-card-title>Últimas Actualizaciones</ion-card-title>
               </ion-card-header>
-              <ion-card-content>Notas, parches y noticias recientes de cada juego documentadas.</ion-card-content>
+              <ion-card-content class="card-content">
+                Notas, parches y noticias recientes de cada juego documentadas.
+              </ion-card-content>
             </ion-card>
           </ion-col>
 
           <ion-col size="12" size-md="6" size-lg="4">
-            <ion-card button class="card">
-              <ion-card-header>
+            <ion-card button class="highlight-card">
+              <ion-card-header class="card-header">
                 <ion-card-title>Guías y Estrategias</ion-card-title>
               </ion-card-header>
-              <ion-card-content>Walkthroughs, builds y tips para dominar tus juegos favoritos.</ion-card-content>
+              <ion-card-content class="card-content">
+                Walkthroughs, builds y tips para dominar tus juegos favoritos.
+              </ion-card-content>
             </ion-card>
           </ion-col>
+
         </ion-row>
       </ion-grid>
     </section>
@@ -62,7 +70,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size="6" size-md="4" size-lg="3" *ngFor="let game of filterHomeGames()">
-            <ion-card button [routerLink]="['/wiki-detail', game.id]" class="card">
+            <ion-card button [routerLink]="['/wiki-detail', game.id]" class="recommend-card">
               <img [src]="game.image_url" [alt]="game.title">
               <ion-card-content>{{ game.title }}</ion-card-content>
             </ion-card>
@@ -84,7 +92,7 @@
 
 </ion-content>
 
-<ion-footer [hidden]="!isMobile">
+<ion-footer *ngIf="isMobile">
   <ion-toolbar>
     <app-bottombar></app-bottombar>
   </ion-toolbar>
