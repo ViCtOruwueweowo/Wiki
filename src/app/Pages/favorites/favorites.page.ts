@@ -32,14 +32,14 @@ export class FavoritesPage implements OnInit {
     this.checkScreen();
     this.isWebAuthnSupported = ('credentials' in navigator) && ('PublicKeyCredential' in window);
 
-    if (this.platform.is('capacitor') && this.isMobile) {
-      // PWA en móvil → intentar huella nativa
-      this.authenticateWithBiometricMobile();
+    if (this.isMobile) {
+      // fallback PIN en móviles si WebAuthn no está disponible
+      this.simulateBiometricMobile();
     } else if (this.isWebAuthnSupported) {
-      // PC o navegador compatible → WebAuthn
+      // WebAuthn en PC / PWA HTTPS
       this.authenticateWithWebAuthn();
     } else {
-      this.showAlert('Info', 'Biometría no disponible en este navegador.');
+      this.showAlert('Error', 'Biometría no soportada en este navegador.');
     }
   }
 
@@ -48,48 +48,43 @@ export class FavoritesPage implements OnInit {
 
   checkScreen() { this.isMobile = window.innerWidth <= 768; }
 
-  // ---------------- WebAuthn para PC ----------------
+  // ---------------- WebAuthn solo biometría interna ----------------
   async authenticateWithWebAuthn() {
     try {
       const challenge = new Uint8Array([21,32,45,10,99,100,200,50]).buffer;
+
       const publicKeyCredentialRequestOptions: any = {
         challenge: challenge,
         timeout: 60000,
-        userVerification: 'required'
+        userVerification: 'required', // siempre pide biometría
+        authenticatorSelection: {
+          authenticatorAttachment: 'platform', // SOLO biometría interna
+          userVerification: 'required'
+        }
       };
+
       const credential: any = await navigator.credentials.get({ publicKey: publicKeyCredentialRequestOptions });
 
       if (credential) {
-        console.log('Autenticación WebAuthn exitosa', credential);
-        this.showAlert('Éxito', 'Acceso concedido a Favorites (WebAuthn)');
+        console.log('Autenticación exitosa', credential);
+        this.showAlert('Éxito', 'Acceso concedido a Favorites');
       } else {
-        this.showPinFallback();
+        this.showAlert('Fallido', 'No se pudo autenticar el usuario');
       }
     } catch (err: any) {
       console.error('Error WebAuthn:', err);
-      this.showPinFallback();
-    }
-  }
-
-  // ---------------- Huella móvil PWA ----------------
-  async authenticateWithBiometricMobile() {
-    try {
-      // Aquí iría un plugin nativo si fuera Capacitor (solo nativo)
-      // En PWA móvil → WebAuthn también puede intentar PIN/biometría de plataforma
-      if (this.isWebAuthnSupported) {
-        await this.authenticateWithWebAuthn();
+      if (err.name === 'NotAllowedError') {
+        this.showAlert('Cancelado', 'Usuario canceló la autenticación');
       } else {
-        this.showPinFallback();
+        this.showAlert('Error', 'Autenticación fallida: ' + err.message);
       }
-    } catch {
-      this.showPinFallback();
     }
   }
 
-  // ---------------- Fallback PIN ----------------
-  async showPinFallback() {
+  // ---------------- Fallback PIN para móvil ----------------
+  async simulateBiometricMobile() {
     const alert = await this.alertCtrl.create({
-      header: 'Autenticación requerida',
+      header: 'Autenticación',
       message: 'Ingresa tu PIN para acceder a Favorites',
       inputs: [{ name: 'pin', type: 'password', placeholder: 'PIN' }],
       buttons: [
@@ -98,8 +93,8 @@ export class FavoritesPage implements OnInit {
           text: 'OK',
           handler: data => {
             if (data.pin === '1234') {
-              console.log('PIN correcto');
-              this.showAlert('Éxito', 'Acceso concedido a Favorites (PIN)');
+              console.log('Acceso permitido en móvil (simulado)');
+              this.showAlert('Éxito', 'Acceso concedido a Favorites (simulado)');
             } else {
               console.log('PIN incorrecto');
               this.showAlert('Fallido', 'PIN incorrecto');
@@ -120,5 +115,4 @@ export class FavoritesPage implements OnInit {
     });
     await alert.present();
   }
-
 }
