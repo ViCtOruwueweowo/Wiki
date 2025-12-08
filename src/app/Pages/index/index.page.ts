@@ -34,25 +34,25 @@ export class IndexPage implements OnInit {
   deferredPrompt: any = null;
   showInstallBanner: boolean = false;
 
-ngOnInit() {
-  this.checkScreen();
-  this.getGames();
-  this.listenInstallEvent();
-  this.registerServiceWorker();
-}
+  ngOnInit() {
+    this.checkScreen();
+    this.getGames();
+    this.listenInstallEvent();
+    this.registerServiceWorker();
+  }
 
   @HostListener('window:resize')
   onResize() { this.checkScreen(); }
-async registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    try {
-      const registration = await navigator.serviceWorker.register('/ngsw-worker.js');
-      console.log('✅ Service Worker registrado:', registration.scope);
-    } catch (err) {
-      console.error('❌ Error registrando SW:', err);
+  async registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+      try {
+        const registration = await navigator.serviceWorker.register('/pwa/ngsw-worker.js', { scope: '/pwa/' });
+        console.log('✅ Service Worker registrado:', registration.scope);
+      } catch (err) {
+        console.error('❌ Error registrando SW:', err);
+      }
     }
   }
-}
 
   checkScreen() { this.isMobile = window.innerWidth <= 768; }
 
