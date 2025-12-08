@@ -12,12 +12,17 @@
 
   <!-- TOAST DE INSTALACIÓN PWA -->
   <ng-container *ngIf="showInstallBanner">
-    <div class="install-banner">
-      <p>Instala la app en tu dispositivo</p>
-      <ion-button color="primary" expand="block" (click)="showInstallPrompt()">Instalar App</ion-button>
-      <ion-button fill="clear" color="medium" (click)="closeInstallBanner()">✖ Cerrar</ion-button>
+    <div class="install-banner-modal">
+      <div class="install-header">
+        <p>¡Instala UWiki en tu dispositivo!</p>
+        <ion-button fill="clear" color="light" class="close-btn" (click)="closeInstallBanner()">✖</ion-button>
+      </div>
+      <div class="install-body">
+        <ion-button color="primary" expand="block" (click)="showInstallPrompt()">Instalar App</ion-button>
+      </div>
     </div>
   </ng-container>
+
 
   <div class="container">
 
