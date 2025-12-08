@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, AlertController, Platform } from '@ionic/angular';
+import { IonicModule, AlertController } from '@ionic/angular';
 import { TopbarComponent } from 'src/app/Components/topbar/topbar.component';
 import { BottombarComponent } from 'src/app/Components/bottombar/bottombar.component';
 import { RouterLink, RouterModule } from '@angular/router';
@@ -26,21 +26,19 @@ export class FavoritesPage implements OnInit {
   isMobile: boolean = false;
   isWebAuthnSupported: boolean = false;
 
-  constructor(private alertCtrl: AlertController, private platform: Platform) { }
+  constructor(private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.checkScreen();
     this.isWebAuthnSupported = ('credentials' in navigator) && ('PublicKeyCredential' in window);
 
-    if (this.isMobile) {
-      // fallback PIN en móviles si WebAuthn no está disponible
-      this.simulateBiometricMobile();
-    } else if (this.isWebAuthnSupported) {
-      // WebAuthn en PC / PWA HTTPS
-      this.authenticateWithWebAuthn();
-    } else {
-      this.showAlert('Error', 'Biometría no soportada en este navegador.');
+    if (!this.isWebAuthnSupported) {
+      this.showAlert('Error', 'Tu navegador no soporta autenticación biométrica.');
+      return;
     }
+
+    // Intentar autenticar, si no hay credencial, registrar primero
+    this.authenticateOrRegister();
   }
 
   @HostListener('window:resize')
@@ -48,62 +46,78 @@ export class FavoritesPage implements OnInit {
 
   checkScreen() { this.isMobile = window.innerWidth <= 768; }
 
-  // ---------------- WebAuthn solo biometría interna ----------------
-  async authenticateWithWebAuthn() {
+  async authenticateOrRegister() {
     try {
-      const challenge = new Uint8Array([21,32,45,10,99,100,200,50]).buffer;
+      const stored = localStorage.getItem('webauthn_registered');
 
-      const publicKeyCredentialRequestOptions: any = {
-        challenge: challenge,
-        timeout: 60000,
-        userVerification: 'required', // siempre pide biometría
-        authenticatorSelection: {
-          authenticatorAttachment: 'platform', // SOLO biometría interna
-          userVerification: 'required'
+      if (!stored) {
+        // Registrar nueva credencial biométrica
+        const credential = await this.registerBiometric();
+        if (credential) {
+          localStorage.setItem('webauthn_registered', 'true');
+          this.showAlert('Registro exitoso', 'Huella registrada, ahora puedes autenticar.');
         }
+      }
+
+      // Luego autenticar
+      await this.authenticateBiometric();
+
+    } catch (err: any) {
+      console.error(err);
+      this.showAlert('Error', 'No se pudo autenticar: ' + err.message);
+    }
+  }
+
+  // ---------------- Registro biométrico ----------------
+  async registerBiometric() {
+    try {
+      const challenge = new Uint8Array([21,32,45,10,99,100,200,50]).buffer; // En producción, traer del backend
+      const publicKeyOptions: PublicKeyCredentialCreationOptions = {
+        challenge,
+        rp: { name: 'Mi PWA' },
+        user: { id: new Uint8Array([1]), name: 'victor', displayName: 'Victor' },
+        pubKeyCredParams: [{ alg: -7, type: 'public-key' }],
+        authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required' },
+        timeout: 60000,
+      };
+
+      const credential: any = await navigator.credentials.create({ publicKey: publicKeyOptions });
+      console.log('Credencial registrada', credential);
+      return credential;
+
+    } catch (err: any) {
+      console.error('Error registrando biometría', err);
+      this.showAlert('Error', 'Registro biométrico fallido: ' + err.message);
+      return null;
+    }
+  }
+
+  // ---------------- Autenticación biométrica ----------------
+  async authenticateBiometric() {
+    try {
+      const challenge = new Uint8Array([21,32,45,10,99,100,200,50]).buffer; // En producción, traer del backend
+      const publicKeyCredentialRequestOptions: PublicKeyCredentialRequestOptions = {
+        challenge,
+        timeout: 60000,
+        userVerification: 'required',
       };
 
       const credential: any = await navigator.credentials.get({ publicKey: publicKeyCredentialRequestOptions });
-
       if (credential) {
         console.log('Autenticación exitosa', credential);
         this.showAlert('Éxito', 'Acceso concedido a Favorites');
       } else {
         this.showAlert('Fallido', 'No se pudo autenticar el usuario');
       }
+
     } catch (err: any) {
-      console.error('Error WebAuthn:', err);
+      console.error('Error autenticando biometría', err);
       if (err.name === 'NotAllowedError') {
         this.showAlert('Cancelado', 'Usuario canceló la autenticación');
       } else {
         this.showAlert('Error', 'Autenticación fallida: ' + err.message);
       }
     }
-  }
-
-  // ---------------- Fallback PIN para móvil ----------------
-  async simulateBiometricMobile() {
-    const alert = await this.alertCtrl.create({
-      header: 'Autenticación',
-      message: 'Ingresa tu PIN para acceder a Favorites',
-      inputs: [{ name: 'pin', type: 'password', placeholder: 'PIN' }],
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'OK',
-          handler: data => {
-            if (data.pin === '1234') {
-              console.log('Acceso permitido en móvil (simulado)');
-              this.showAlert('Éxito', 'Acceso concedido a Favorites (simulado)');
-            } else {
-              console.log('PIN incorrecto');
-              this.showAlert('Fallido', 'PIN incorrecto');
-            }
-          }
-        }
-      ]
-    });
-    await alert.present();
   }
 
   // ---------------- Alert genérico ----------------
@@ -115,4 +129,5 @@ export class FavoritesPage implements OnInit {
     });
     await alert.present();
   }
+
 }
