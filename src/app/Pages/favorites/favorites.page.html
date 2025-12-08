@@ -13,7 +13,7 @@
     <ion-icon name="finger-print-outline" style="font-size: 60px; color: #3880ff;"></ion-icon>
     <h2>Autenticación requerida</h2>
     <p>Coloca tu huella o utiliza Face ID para acceder a Favorites.</p>
-    <p *ngIf="!('credentials' in navigator) || !('PublicKeyCredential' in window)" style="color:red;">
+    <p *ngIf="!isWebAuthnSupported" style="color:red;">
       Tu navegador no soporta autenticación biométrica.
     </p>
   </div>

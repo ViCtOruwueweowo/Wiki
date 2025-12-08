@@ -24,12 +24,19 @@ import { RouterLink, RouterModule } from '@angular/router';
 export class FavoritesPage implements OnInit {
 
   isMobile: boolean = false;
+  isWebAuthnSupported: boolean = false; // <--- Propiedad para template
 
   constructor(private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.checkScreen();
-    this.authenticateWithWebAuthn(); // Siempre intentamos WebAuthn en producción
+    this.isWebAuthnSupported = ('credentials' in navigator) && ('PublicKeyCredential' in window);
+
+    if (this.isWebAuthnSupported) {
+      this.authenticateWithWebAuthn();
+    } else {
+      this.showAlert('Error', 'Biometría no soportada en este navegador.');
+    }
   }
 
   @HostListener('window:resize')
@@ -39,26 +46,21 @@ export class FavoritesPage implements OnInit {
 
   // ---------------- WebAuthn para PC y móvil ----------------
   async authenticateWithWebAuthn() {
-    if (!('credentials' in navigator) || !('PublicKeyCredential' in window)) {
-      this.showAlert('Error', 'Biometría no soportada en este navegador.');
-      return;
-    }
-
     try {
-      // Challenge dinámico idealmente generado por tu backend
+      // Challenge de prueba (en producción, generar en backend)
       const challenge = new Uint8Array([21,32,45,10,99,100,200,50]).buffer;
 
       const publicKeyCredentialRequestOptions: any = {
         challenge: challenge,
         timeout: 60000,
-        userVerification: 'required', // Pide biometría siempre que sea posible
+        userVerification: 'required', // Siempre pedir biometría
       };
 
       const credential: any = await navigator.credentials.get({ publicKey: publicKeyCredentialRequestOptions });
 
       if (credential) {
         console.log('Autenticación exitosa', credential);
-        // Aquí podrías enviar credential.response a tu backend para validación
+        // En producción, enviar credential.response al backend para validar
         this.showAlert('Éxito', 'Acceso concedido a Favorites');
       } else {
         this.showAlert('Fallido', 'No se pudo autenticar el usuario');
