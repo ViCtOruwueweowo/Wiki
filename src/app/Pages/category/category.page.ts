@@ -59,7 +59,7 @@ export class CategoryPage implements OnInit {
 
     const token = localStorage.getItem('authToken');
 
-    this.http.get('http://143.110.205.116/api/categories/categoriesList', {
+    this.http.get('https://143.110.205.116/api/categories/categoriesList', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: async (res: any) => {
@@ -130,7 +130,7 @@ export class CategoryPage implements OnInit {
     const loading = await this.loadingCtrl.create({ message: 'Eliminando categoría...' });
     await loading.present();
 
-    this.http.delete(`http://143.110.205.116/api/categories/categorieRemove/${categoria.id}`, {
+    this.http.delete(`https://143.110.205.116/api/categories/categorieRemove/${categoria.id}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: async (res: any) => {

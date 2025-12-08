@@ -67,7 +67,7 @@ export class EditarPlataformaComponent  {
 
     const token = localStorage.getItem('authToken');
     const body = { name: this.categoria.nombre };
-    const url = `http://143.110.205.116/api/platforms/platformUpdate/${this.categoria.id}`;
+    const url = `https://143.110.205.116/api/platforms/platformUpdate/${this.categoria.id}`;
 
     this.http.put(url, body, {
       headers: { Authorization: `Bearer ${token}` }

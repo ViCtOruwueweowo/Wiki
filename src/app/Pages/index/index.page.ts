@@ -48,11 +48,13 @@ export class IndexPage implements OnInit {
   // ====== CARGA DE JUEGOS DESDE TU API ======
   async getGames() {
     try {
-      const response = await fetch('http://143.110.205.116/api/auth/games');
+      // IMPORTANTE: usar HTTPS para evitar Mixed Content
+      const apiUrl = 'https://143.110.205.116/api/auth/games';
+      const response = await fetch(apiUrl);
       const data = await response.json();
-      this.games = data.data;
+      this.games = data.data || [];
     } catch (e) {
-      console.log("Error cargando juegos", e);
+      console.error("Error cargando juegos:", e);
     }
   }
 
@@ -69,7 +71,8 @@ export class IndexPage implements OnInit {
     window.addEventListener('beforeinstallprompt', (e: any) => {
       e.preventDefault();
       this.deferredPrompt = e;
-      this.showInstallBanner = true;
+      // Mostrar solo si es móvil y soporta PWA
+      if (this.isMobile) this.showInstallBanner = true;
     });
   }
 

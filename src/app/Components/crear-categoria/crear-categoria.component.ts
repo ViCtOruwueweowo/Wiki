@@ -90,7 +90,7 @@ export class CrearCategoriaComponent {
     const body = { name: this.name };
     const token = localStorage.getItem('authToken'); // Ajusta según donde tengas tu JWT
 
-    this.http.post('http://143.110.205.116/api/categories/registerCategories', body, {
+    this.http.post('https://143.110.205.116/api/categories/registerCategories', body, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: async (res: any) => {

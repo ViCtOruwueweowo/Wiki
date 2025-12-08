@@ -58,28 +58,28 @@ export class GestionPage implements OnInit {
       "Authorization":`Bearer ${token}`
     });
 
-    this.http.get<any>('http://143.110.205.116/api/auth/games',{headers})
+    this.http.get<any>('https://143.110.205.116/api/auth/games',{headers})
       .subscribe(res=>{
         this.gamesTotal = res.data.length;
         this.loadMainChart();
         this.loadIndividualCharts();
       });
 
-    this.http.get<any>('http://143.110.205.116/api/categories/categoriesList',{headers})
+    this.http.get<any>('https://143.110.205.116/api/categories/categoriesList',{headers})
       .subscribe(res=>{
         this.categoriesTotal = res.data.length;
         this.loadMainChart();
         this.loadIndividualCharts();
       });
 
-    this.http.get<any>('http://143.110.205.116/api/developers/developerList',{headers})
+    this.http.get<any>('https://143.110.205.116/api/developers/developerList',{headers})
       .subscribe(res=>{
         this.developersTotal = res.data.length;
         this.loadMainChart();
         this.loadIndividualCharts();
       });
 
-    this.http.get<any>('http://143.110.205.116/api/platforms/platformList',{headers})
+    this.http.get<any>('https://143.110.205.116/api/platforms/platformList',{headers})
       .subscribe(res=>{
         this.platformsTotal = res.data.length;
         this.loadMainChart();

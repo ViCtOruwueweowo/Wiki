@@ -63,7 +63,7 @@ export class ProfilePage implements OnInit {
       'Authorization': `Bearer ${token}`
     };
 
-    this.http.get("http://143.110.205.116/api/my-profile", { headers })
+    this.http.get("https://143.110.205.116/api/my-profile", { headers })
       .subscribe((res: any) => {
         this.user = res.data;
         this.favorites = []; // si luego agregas favoritos
@@ -80,7 +80,7 @@ export class ProfilePage implements OnInit {
     // Crear headers solo si existe token
     const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
 
-    this.http.post("http://143.110.205.116/api/logout", {}, { headers })
+    this.http.post("https://143.110.205.116/api/logout", {}, { headers })
       .subscribe({
         next: async (res: any) => {
           localStorage.clear();

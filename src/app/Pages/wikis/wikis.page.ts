@@ -46,7 +46,7 @@ export class WikisPage implements OnInit {
   // Obtener datos de tu API
   async getGames() {
     try {
-      const response = await fetch('http://143.110.205.116/api/auth/games');
+      const response = await fetch('https://143.110.205.116/api/auth/games');
       const data = await response.json();
       this.games = data.data;
     } catch (e) {
