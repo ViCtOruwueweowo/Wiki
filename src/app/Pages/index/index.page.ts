@@ -34,6 +34,9 @@ export class IndexPage implements OnInit {
   deferredPrompt: any = null;
   showInstallBanner: boolean = false;
 
+  // =========== PWA ACTUALIZACIÓN ===========
+  showUpdateAvailable: boolean = false;
+
   ngOnInit() {
     this.checkScreen();
     this.getGames();
@@ -43,13 +46,33 @@ export class IndexPage implements OnInit {
 
   @HostListener('window:resize')
   onResize() { this.checkScreen(); }
+
   async registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       try {
         const registration = await navigator.serviceWorker.register('/pwa/ngsw-worker.js', { scope: '/pwa/' });
-        console.log('✅ Service Worker registrado:', registration.scope);
+        console.log(' Service Worker registrado:', registration.scope);
+
+        //  Detectar nueva versión
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // Nueva versión disponible
+                this.showUpdateAvailable = true;
+              }
+            });
+          }
+        });
+
+        // Escuchar mensajes de skipWaiting
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          window.location.reload();
+        });
+
       } catch (err) {
-        console.error('❌ Error registrando SW:', err);
+        console.error('Error registrando SW:', err);
       }
     }
   }
@@ -59,7 +82,6 @@ export class IndexPage implements OnInit {
   // ====== CARGA DE JUEGOS DESDE TU API ======
   async getGames() {
     try {
-      // IMPORTANTE: usar HTTPS para evitar Mixed Content
       const apiUrl = 'https://grupoduran.shop/api/auth/games';
       const response = await fetch(apiUrl);
       const data = await response.json();
@@ -76,13 +98,12 @@ export class IndexPage implements OnInit {
   }
 
   // ==========================================================
-  // 💛 EVENTO PARA MOSTRAR EL POPUP DE INSTALAR COMO PWA
+  //  EVENTO PARA MOSTRAR EL POPUP DE INSTALAR COMO PWA
   // ==========================================================
   listenInstallEvent() {
     window.addEventListener('beforeinstallprompt', (e: any) => {
       e.preventDefault();
       this.deferredPrompt = e;
-      // Mostrar solo si es móvil y soporta PWA
       if (this.isMobile) this.showInstallBanner = true;
     });
   }
@@ -95,8 +116,8 @@ export class IndexPage implements OnInit {
 
     this.deferredPrompt.userChoice.then((choice: any) => {
       console.log(choice.outcome === 'accepted'
-        ? '👍 El usuario instaló la app'
-        : '❌ El usuario rechazó');
+        ? ' El usuario instaló la app'
+        : ' El usuario rechazó');
 
       this.showInstallBanner = false;
       this.deferredPrompt = null;
@@ -106,5 +127,12 @@ export class IndexPage implements OnInit {
   // =============== CERRAR SIN INSTALAR =================
   closeInstallBanner() {
     this.showInstallBanner = false;
+  }
+
+  // ================= ACTUALIZAR PWA ==================
+  reloadApp() {
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
+    }
   }
 }

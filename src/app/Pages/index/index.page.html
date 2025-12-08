@@ -9,6 +9,16 @@
     <h1>Universal Wiki Utopia</h1>
     <p>La enciclopedia de referencia para jugadores y desarrolladores</p>
   </section>
+  
+    <!-- TOAST DE ACTUALIZACION PWA -->
+  <ng-container *ngIf="showUpdateAvailable">
+    <div class="update-banner">
+      <p>¡Nueva versión disponible! Actualiza para continuar.</p>
+      <ion-button color="primary" expand="block" (click)="reloadApp()">Actualizar</ion-button>
+      <ion-button fill="clear" color="medium" (click)="showUpdateAvailable = false">✖ Cerrar</ion-button>
+    </div>
+  </ng-container>
+
 
   <!-- TOAST DE INSTALACIÓN PWA -->
   <ng-container *ngIf="showInstallBanner">
