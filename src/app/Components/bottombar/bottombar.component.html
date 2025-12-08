@@ -1,40 +1,19 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
+<ion-tab-button [hidden]="!userRole" routerLink="/favorites">
+  <ion-icon name="heart-outline"></ion-icon>
+  <ion-label>Favoritos</ion-label>
+</ion-tab-button>
 
-    <ion-tab-button routerLink="/">
-      <ion-icon name="home-outline" class="icon"></ion-icon>
-      <ion-label>Inicio</ion-label>
-    </ion-tab-button>
+<ion-tab-button [hidden]="userRole !== 'admin'" routerLink="/gestion">
+  <ion-icon name="settings-outline"></ion-icon>
+  <ion-label>Gestion</ion-label>
+</ion-tab-button>
 
+<ion-tab-button [hidden]="!userRole" routerLink="/profile">
+  <ion-icon name="person-circle-outline"></ion-icon>
+  <ion-label>Yo</ion-label>
+</ion-tab-button>
 
-
-    <ion-tab-button routerLink="/wikis">
-      <ion-icon name="book-outline"></ion-icon>
-      <ion-label>Wikis</ion-label>
-    </ion-tab-button>
-
-    <!-- FAVORITOS si hay sesión -->
-    <ion-tab-button *ngIf="userRole" routerLink="/favorites">
-      <ion-icon name="heart-outline"></ion-icon>
-      <ion-label>Favoritos</ion-label>
-    </ion-tab-button>
-
-    <!-- GESTION solo si el rol es admin -->
-    <ion-tab-button *ngIf="userRole === 'admin'" routerLink="/gestion">
-      <ion-icon name="settings-outline"></ion-icon>
-      <ion-label>Gestion</ion-label>
-    </ion-tab-button>
-
-    <!-- PERFIL si hay sesión -->
-    <ion-tab-button *ngIf="userRole" routerLink="/profile">
-      <ion-icon name="person-circle-outline"></ion-icon>
-      <ion-label>Yo</ion-label>
-    </ion-tab-button>
-
-        <!-- SOLO si NO hay sesión -->
-    <ion-tab-button *ngIf="!userRole" routerLink="/login">
-      <ion-icon name="log-in-outline"></ion-icon>
-      <ion-label>Iniciar</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-tab-button [hidden]="userRole" routerLink="/login">
+  <ion-icon name="log-in-outline"></ion-icon>
+  <ion-label>Iniciar</ion-label>
+</ion-tab-button>
