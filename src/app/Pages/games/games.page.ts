@@ -58,7 +58,7 @@ async cargarJuegos() {
 
   const token = localStorage.getItem('authToken');
 
-  this.http.get('http://127.0.0.1:8000/api/auth/games', {
+  this.http.get('http://143.110.205.116/api/auth/games', {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe({
     next: async (res: any) => {
@@ -142,7 +142,7 @@ async cargarJuegos() {
 
   // Llamada PUT al backend
   this.http.put(
-    `http://127.0.0.1:8000/api/games1/games/deactivate/${juego.id}`,
+    `http://143.110.205.116/api/games1/games/deactivate/${juego.id}`,
     {}, // Body vacío
     { headers: { Authorization: `Bearer ${token}` } } // Headers correctos
   ).subscribe({

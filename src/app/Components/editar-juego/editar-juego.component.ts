@@ -154,7 +154,7 @@ export class EditarJuegoComponent implements OnInit, OnChanges {
 
   loadCategories() {
     const token = localStorage.getItem('authToken') || '';
-    this.http.get('http://127.0.0.1:8000/api/categories/categoriesList', { headers: { Authorization: `Bearer ${token}` } })
+    this.http.get('http://143.110.205.116/api/categories/categoriesList', { headers: { Authorization: `Bearer ${token}` } })
       .subscribe((res: any) => {
         this.categories = res.data?.map((cat: any) => ({ id: cat.id, nombre: cat.name })) || [];
         console.log('Categorías cargadas:', this.categories);
@@ -163,7 +163,7 @@ export class EditarJuegoComponent implements OnInit, OnChanges {
 
   loadDevelopers() {
     const token = localStorage.getItem('authToken') || '';
-    this.http.get('http://127.0.0.1:8000/api/developers/developerList', { headers: { Authorization: `Bearer ${token}` } })
+    this.http.get('http://143.110.205.116/api/developers/developerList', { headers: { Authorization: `Bearer ${token}` } })
       .subscribe((res: any) => {
         this.developers = res.data?.map((dev: any) => ({ id: dev.id, nombre: dev.name })) || [];
         console.log('Desarrolladores cargados:', this.developers);
@@ -172,7 +172,7 @@ export class EditarJuegoComponent implements OnInit, OnChanges {
 
   loadPlatforms() {
     const token = localStorage.getItem('authToken') || '';
-    this.http.get('http://127.0.0.1:8000/api/platforms/platformList', { headers: { Authorization: `Bearer ${token}` } })
+    this.http.get('http://143.110.205.116/api/platforms/platformList', { headers: { Authorization: `Bearer ${token}` } })
       .subscribe((res: any) => {
         this.platforms = res.data?.map((p: any) => ({ id: p.id, nombre: p.name })) || [];
         console.log('Plataformas cargadas:', this.platforms);
@@ -220,7 +220,7 @@ export class EditarJuegoComponent implements OnInit, OnChanges {
     if (this.selectedImage) formData.append('image', this.selectedImage);
 
     const token = localStorage.getItem('authToken') || '';
-    const url = `http://127.0.0.1:8000/api/games1/update/${this.juego.id}`;
+    const url = `http://143.110.205.116/api/games1/update/${this.juego.id}`;
 
     this.http.post(url, formData, { headers: { Authorization: `Bearer ${token}` } })
       .subscribe({

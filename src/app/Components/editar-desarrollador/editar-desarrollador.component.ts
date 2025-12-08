@@ -71,7 +71,7 @@ export class EditarDesarrolladorComponent {
 
     const token = localStorage.getItem('authToken');
     const body = { name: this.categoria.nombre };
-    const url = `http://127.0.0.1:8000/api/developers/developerUpdate/${this.categoria.id}`;
+    const url = `http://143.110.205.116/api/developers/developerUpdate/${this.categoria.id}`;
 
     this.http.put(url, body, {
       headers: { Authorization: `Bearer ${token}` }

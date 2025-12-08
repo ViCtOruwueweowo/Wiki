@@ -91,7 +91,7 @@ export class CrearDesarrolladorComponent {
     const body = { name: this.name };
     const token = localStorage.getItem('authToken'); // Ajusta según donde tengas tu JWT
 
-    this.http.post('http://127.0.0.1:8000/api/developers/registerDevelopers', body, {
+    this.http.post('http://143.110.205.116/api/developers/registerDevelopers', body, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: async (res: any) => {

@@ -72,7 +72,7 @@ export class LoginPage implements OnInit, AfterViewInit {
       captcha: this.captcha
     };
 
-    this.http.post<any>('http://127.0.0.1:8000/api/auth/login', body).subscribe({
+    this.http.post<any>('http://143.110.205.116/api/auth/login', body).subscribe({
       next: async (res) => {
         await loading.dismiss();
 

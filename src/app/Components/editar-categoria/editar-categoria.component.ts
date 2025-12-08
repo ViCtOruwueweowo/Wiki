@@ -70,7 +70,7 @@ export class EditarCategoriaComponent {
 
     const token = localStorage.getItem('authToken');
     const body = { name: this.categoria.nombre };
-    const url = `http://127.0.0.1:8000/api/categories/categorieUpdate/${this.categoria.id}`;
+    const url = `http://143.110.205.116/api/categories/categorieUpdate/${this.categoria.id}`;
 
     this.http.put(url, body, {
       headers: { Authorization: `Bearer ${token}` }

@@ -99,7 +99,7 @@ export class RegisterPage implements OnInit {
       password: this.password
     };
 
-    this.http.post('http://127.0.0.1:8000/api/auth/registerVisit', payload)
+    this.http.post('http://143.110.205.116/api/auth/registerVisit', payload)
       .subscribe({
         next: async (res: any) => {
           await loading.dismiss();

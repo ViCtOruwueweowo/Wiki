@@ -157,7 +157,7 @@ export class CrearJuegoComponent implements OnInit {
   // Carga categorías reales
   loadCategories() {
     const token = localStorage.getItem('authToken');
-    this.http.get('http://127.0.0.1:8000/api/categories/categoriesList', { headers: { Authorization: `Bearer ${token}` } })
+    this.http.get('http://143.110.205.116/api/categories/categoriesList', { headers: { Authorization: `Bearer ${token}` } })
       .subscribe((res: any) => {
         this.categories = res.data
           ? res.data.map((cat: any) => ({ id: cat.id, nombre: cat.name }))
@@ -168,7 +168,7 @@ export class CrearJuegoComponent implements OnInit {
   // Carga desarrolladores reales
   loadDevelopers() {
     const token = localStorage.getItem('authToken');
-    this.http.get('http://127.0.0.1:8000/api/developers/developerList', { headers: { Authorization: `Bearer ${token}` } })
+    this.http.get('http://143.110.205.116/api/developers/developerList', { headers: { Authorization: `Bearer ${token}` } })
       .subscribe((res: any) => {
         this.developers = res.data
           ? res.data.map((dev: any) => ({ id: dev.id, nombre: dev.name }))
@@ -179,7 +179,7 @@ export class CrearJuegoComponent implements OnInit {
   // Carga plataformas reales
   loadPlatforms() {
     const token = localStorage.getItem('authToken');
-    this.http.get('http://127.0.0.1:8000/api/platforms/platformList', { headers: { Authorization: `Bearer ${token}` } })
+    this.http.get('http://143.110.205.116/api/platforms/platformList', { headers: { Authorization: `Bearer ${token}` } })
       .subscribe((res: any) => {
         this.platforms = res.data
           ? res.data.map((p: any) => ({ id: p.id, nombre: p.name }))
@@ -230,7 +230,7 @@ export class CrearJuegoComponent implements OnInit {
     const token = localStorage.getItem('authToken');
 
     this.http.post(
-      'http://127.0.0.1:8000/api/games1/registerGames',
+      'http://143.110.205.116/api/games1/registerGames',
       formData,
       { headers: { Authorization: `Bearer ${token}` } }
     ).subscribe({

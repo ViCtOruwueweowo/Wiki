@@ -36,7 +36,7 @@ export class WikiDetailPage implements OnInit {
   }
 
   cargarJuego(){
-    this.http.get<any>("http://127.0.0.1:8000/api/auth/games")
+    this.http.get<any>("http://143.110.205.116/api/auth/games")
       .subscribe(res => {
         this.juego = res.data.find((j: any) => j.id === this.id);
       });

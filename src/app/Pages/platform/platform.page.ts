@@ -59,7 +59,7 @@ export class PlatformPage implements OnInit {
   
       const token = localStorage.getItem('authToken');
   
-      this.http.get('http://127.0.0.1:8000/api/platforms/platformList', {
+      this.http.get('hhttp://143.110.205.116/api/platforms/platformList', {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe({
         next: async (res: any) => {
@@ -130,7 +130,7 @@ export class PlatformPage implements OnInit {
       const loading = await this.loadingCtrl.create({ message: 'Eliminando categoría...' });
       await loading.present();
   
-      this.http.delete(`http://127.0.0.1:8000/api/platforms/platformRemove/${categoria.id}`, {
+      this.http.delete(`http://143.110.205.116/api/platforms/platformRemove/${categoria.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe({
         next: async (res: any) => {

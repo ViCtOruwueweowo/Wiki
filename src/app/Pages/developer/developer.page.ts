@@ -55,7 +55,7 @@ export class DeveloperPage implements OnInit {
   
       const token = localStorage.getItem('authToken');
   
-      this.http.get('http://127.0.0.1:8000/api/developers/developerList', {
+      this.http.get('http://143.110.205.116/api/developers/developerList', {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe({
         next: async (res: any) => {
@@ -126,7 +126,7 @@ export class DeveloperPage implements OnInit {
       const loading = await this.loadingCtrl.create({ message: 'Eliminando categoría...' });
       await loading.present();
   
-      this.http.delete(`http://127.0.0.1:8000/api/developers/developerRemove/${categoria.id}`, {
+      this.http.delete(`http://143.110.205.116/api/developers/developerRemove/${categoria.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe({
         next: async (res: any) => {
