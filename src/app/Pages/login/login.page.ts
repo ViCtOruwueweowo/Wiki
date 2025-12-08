@@ -52,7 +52,7 @@ export class LoginPage implements OnInit, AfterViewInit {
   async login() {
     console.log('Click en login detectado');
     try {
-      const response = await fetch('https://143.110.205.116/api/auth/login', {
+      const response = await fetch('https://grupoduran.shop/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
