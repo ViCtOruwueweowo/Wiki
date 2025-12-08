@@ -12,6 +12,16 @@
     </p>
   </div>
 
+  <!-- BOTÓN PARA INSTALAR PWA -->
+  <div *ngIf="showInstallBanner" style="text-align:center; margin:20px 0;">
+    <ion-button color="primary" (click)="showInstallPrompt()" expand="block">
+      Instalar App en tu dispositivo
+    </ion-button>
+    <ion-button fill="clear" color="medium" (click)="closeInstallBanner()">
+      ✖ Cerrar
+    </ion-button>
+  </div>
+
   <div style="max-width:1200px; margin:auto; padding:30px 15px;">
 
     <!-- SECCIONES DESTACADAS -->
