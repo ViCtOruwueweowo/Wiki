@@ -12,10 +12,10 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
 
-    // ✅ Solo un service worker
+    // ✅ Registro de Service Worker de Angular
     provideServiceWorker('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000'
+      enabled: !isDevMode(),  // Solo activo en producción
+      registrationStrategy: 'registerWhenStable:30000' // 30s después de cargar
     }),
   ],
 });
