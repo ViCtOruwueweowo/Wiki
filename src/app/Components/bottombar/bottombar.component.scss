@@ -1,0 +1,9 @@
+ion-tab-bar {
+  display: flex;
+  justify-content: space-around; /* o space-evenly */
+}
+
+ion-tab-button {
+  flex: 1 1 auto; /* cada botón toma el mismo espacio */
+  text-align: center;
+}
