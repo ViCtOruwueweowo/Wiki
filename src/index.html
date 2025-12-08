@@ -2,36 +2,31 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>Universal Wikis Utopia</title>
+  <base href="/" />
 
-  <base href="/"/>
+  <meta name="color-scheme" content="light dark" />
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
 
-  <meta name="color-scheme" content="light dark"/>
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="format-detection" content="telephone=no"/>
-  <meta name="msapplication-tap-highlight" content="no"/>
-
-  <!-- reCAPTCHA -->
-  <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoaded&amp;render=explicit" async="" defer=""></script>
-
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.min.css">
-
-  <!-- Ionicons corregido -->
+  <!-- Fonts e Ionicons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons.min.css">
 
-  <!-- Manifest para PWA -->
-  <link rel="manifest" href="manifest.webmanifest">
+  <!-- Manifest y PWA -->
+  <link rel="manifest" href="public/manifest.webmanifest">
   <meta name="theme-color" content="#0c1a2b">
+  <link rel="icon" type="image/png" sizes="192x192" href="public/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="public/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <!-- add to homescreen for ios -->
-  <meta name="mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="manifest" href="manifest.webmanifest">
+  <!-- reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoaded&render=explicit" async defer></script>
 </head>
+
 
 <body>
   <app-root></app-root>
