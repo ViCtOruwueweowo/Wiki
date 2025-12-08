@@ -24,18 +24,20 @@ import { RouterLink, RouterModule } from '@angular/router';
 export class FavoritesPage implements OnInit {
 
   isMobile: boolean = false;
-  isWebAuthnSupported: boolean = false; // <--- Propiedad para template
+  isWebAuthnSupported: boolean = false;
 
   constructor(private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.checkScreen();
+
+    // Detecta si WebAuthn está disponible
     this.isWebAuthnSupported = ('credentials' in navigator) && ('PublicKeyCredential' in window);
 
     if (this.isWebAuthnSupported) {
       this.authenticateWithWebAuthn();
     } else {
-      this.showAlert('Error', 'Biometría no soportada en este navegador.');
+      this.showAlert('Info', 'Tu navegador no soporta autenticación biométrica (WebAuthn).');
     }
   }
 
@@ -44,24 +46,26 @@ export class FavoritesPage implements OnInit {
 
   checkScreen() { this.isMobile = window.innerWidth <= 768; }
 
-  // ---------------- WebAuthn para PC y móvil ----------------
+  // ---------------- WebAuthn ----------------
   async authenticateWithWebAuthn() {
     try {
-      // Challenge de prueba (en producción, generar en backend)
+      // Challenge de prueba (en producción, el backend genera este challenge)
       const challenge = new Uint8Array([21,32,45,10,99,100,200,50]).buffer;
 
       const publicKeyCredentialRequestOptions: any = {
         challenge: challenge,
         timeout: 60000,
-        userVerification: 'required', // Siempre pedir biometría
+        userVerification: 'required', // Siempre solicita biometría
       };
 
-      const credential: any = await navigator.credentials.get({ publicKey: publicKeyCredentialRequestOptions });
+      const credential: any = await navigator.credentials.get({
+        publicKey: publicKeyCredentialRequestOptions
+      });
 
       if (credential) {
         console.log('Autenticación exitosa', credential);
-        // En producción, enviar credential.response al backend para validar
         this.showAlert('Éxito', 'Acceso concedido a Favorites');
+        // En producción: enviar credential.response al backend para validar
       } else {
         this.showAlert('Fallido', 'No se pudo autenticar el usuario');
       }
