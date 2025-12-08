@@ -60,7 +60,7 @@ async registerServiceWorker() {
   async getGames() {
     try {
       // IMPORTANTE: usar HTTPS para evitar Mixed Content
-      const apiUrl = 'https://143.110.205.116/api/auth/games';
+      const apiUrl = 'https://grupoduran.shop/api/auth/games';
       const response = await fetch(apiUrl);
       const data = await response.json();
       this.games = data.data || [];
