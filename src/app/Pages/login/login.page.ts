@@ -42,7 +42,7 @@ export class LoginPage implements OnInit, AfterViewInit {
       const captchaContainer = document.getElementById('recaptcha-container');
       if (captchaContainer) {
         grecaptcha.render('recaptcha-container', {
-          sitekey: '6LdBdCEsAAAAAJKKv2SQGaHJg65GUvMraGMybDXg', // <- PON AQUI TU CLAVE PÚBLICA
+          sitekey: '6LeDPyUsAAAAACwfeolz2oPm5N_u4GoSiLwLuuBk', // <- PON AQUI TU CLAVE PÚBLICA
           callback: 'onRecaptchaSuccess'
         });
       }
