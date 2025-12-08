@@ -37,7 +37,7 @@ export class IndexPage implements OnInit {
   ngOnInit() {
     this.checkScreen();
     this.getGames();
-    this.listenInstallEvent(); // <<--- NECESARIO PARA MOSTRAR VENTANA DE INSTALACIÓN
+    this.listenInstallEvent();
   }
 
   @HostListener('window:resize')
