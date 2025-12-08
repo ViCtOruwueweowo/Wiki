@@ -12,9 +12,9 @@ bootstrapApplication(AppComponent, {
   ],
 });
 
-
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js', { scope: '/' })
+  navigator.serviceWorker.register('/sw.js', { scope: '/' })
     .then((registration) => console.log('✅ SW registrado:', registration.scope))
     .catch((error) => console.error('❌ Error al registrar SW:', error));
 }
+
