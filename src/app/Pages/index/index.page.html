@@ -1,97 +1,70 @@
-<ion-header *ngIf="!isMobile">
+<ion-header [hidden]="isMobile">
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" style="--background:#ffffff; font-family: 'Times New Roman', serif; color:#222;">
+<ion-content fullscreen="true" class="home-content">
 
   <!-- HERO PRINCIPAL -->
-  <div style="text-align:center; padding:40px 15px; border-bottom:2px solid #ccc;">
-    <h1 style="font-size:2.3rem; font-weight:700; margin:0; color:#0c1a2b;">Universal Wiki Utopia</h1>
-    <p style="margin-top:8px; font-size:1rem; color:#555;">
-      La enciclopedia de referencia para jugadores y desarrolladores
-    </p>
-  </div>
+  <section class="hero">
+    <h1>Universal Wiki Utopia</h1>
+    <p>La enciclopedia de referencia para jugadores y desarrolladores</p>
+  </section>
 
   <!-- TOAST DE INSTALACIÓN PWA -->
-  <div *ngIf="showInstallBanner" style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%); 
-              background:#e0f7ff; padding:12px 18px; border-radius:10px; 
-              box-shadow:0 4px 8px rgba(0,0,0,0.2); z-index:999;">
-    <p style="margin:0 0 8px 0; font-weight:600; color:#0c1a2b;">Instala la app en tu dispositivo</p>
-    <ion-button color="primary" (click)="showInstallPrompt()" expand="block">
-      Instalar App
-    </ion-button>
-    <ion-button fill="clear" color="medium" (click)="closeInstallBanner()">
-      ✖ Cerrar
-    </ion-button>
-  </div>
+  <ng-container *ngIf="showInstallBanner">
+    <div class="install-banner">
+      <p>Instala la app en tu dispositivo</p>
+      <ion-button color="primary" expand="block" (click)="showInstallPrompt()">Instalar App</ion-button>
+      <ion-button fill="clear" color="medium" (click)="closeInstallBanner()">✖ Cerrar</ion-button>
+    </div>
+  </ng-container>
 
-  <div style="max-width:1200px; margin:auto; padding:30px 15px;">
+  <div class="container">
 
     <!-- SECCIONES DESTACADAS -->
-    <section style="margin-bottom:50px;">
-      <h2 style="font-size:1.6rem; color:#0c1a2b; border-left:4px solid #3b5998; padding-left:12px; font-weight:600;">
-        Secciones Destacadas
-      </h2>
+    <section class="highlighted">
+      <h2>Secciones Destacadas</h2>
       <ion-grid>
-        <ion-row style="margin-top:20px;">
-
+        <ion-row>
           <ion-col size="12" size-md="6" size-lg="4">
-            <ion-card button
-              style="border:1px solid #ccc; border-radius:6px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.07); transition:transform 0.2s;">
-              <ion-card-header style="border-bottom:1px solid #ddd;">
-                <ion-card-title style="font-weight:600; font-size:1.05rem; color:#0c1a2b;">Juegos
-                  Populares</ion-card-title>
+            <ion-card button class="card">
+              <ion-card-header>
+                <ion-card-title>Juegos Populares</ion-card-title>
               </ion-card-header>
-              <ion-card-content style="font-size:.9rem; color:#444;">Explora los títulos más buscados por la comunidad y
-                jugadores activos.</ion-card-content>
+              <ion-card-content>Explora los títulos más buscados por la comunidad y jugadores activos.</ion-card-content>
             </ion-card>
           </ion-col>
 
           <ion-col size="12" size-md="6" size-lg="4">
-            <ion-card button
-              style="border:1px solid #ccc; border-radius:6px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.07);">
-              <ion-card-header style="border-bottom:1px solid #ddd;">
-                <ion-card-title style="font-weight:600; font-size:1.05rem; color:#0c1a2b;">Últimas
-                  Actualizaciones</ion-card-title>
+            <ion-card button class="card">
+              <ion-card-header>
+                <ion-card-title>Últimas Actualizaciones</ion-card-title>
               </ion-card-header>
-              <ion-card-content style="font-size:.9rem; color:#444;">Notas, parches y noticias recientes de cada juego
-                documentadas.</ion-card-content>
+              <ion-card-content>Notas, parches y noticias recientes de cada juego documentadas.</ion-card-content>
             </ion-card>
           </ion-col>
 
           <ion-col size="12" size-md="6" size-lg="4">
-            <ion-card button
-              style="border:1px solid #ccc; border-radius:6px; background:#fdfdfd; box-shadow:0 2px 5px rgba(0,0,0,.07);">
-              <ion-card-header style="border-bottom:1px solid #ddd;">
-                <ion-card-title style="font-weight:600; font-size:1.05rem; color:#0c1a2b;">Guías y
-                  Estrategias</ion-card-title>
+            <ion-card button class="card">
+              <ion-card-header>
+                <ion-card-title>Guías y Estrategias</ion-card-title>
               </ion-card-header>
-              <ion-card-content style="font-size:.9rem; color:#444;">Walkthroughs, builds y tips para dominar tus juegos
-                favoritos.</ion-card-content>
+              <ion-card-content>Walkthroughs, builds y tips para dominar tus juegos favoritos.</ion-card-content>
             </ion-card>
           </ion-col>
-
         </ion-row>
       </ion-grid>
     </section>
 
     <!-- RECOMENDACIONES DINÁMICAS -->
-    <section style="margin-bottom:50px;">
-      <h2 style="font-size:1.6rem; color:#0c1a2b; border-left:4px solid #3b5998; padding-left:12px; font-weight:600;">
-        Recomendaciones para ti
-      </h2>
-
+    <section class="recommendations">
+      <h2>Recomendaciones para ti</h2>
       <ion-grid>
-        <ion-row style="margin-top:15px;">
+        <ion-row>
           <ion-col size="6" size-md="4" size-lg="3" *ngFor="let game of filterHomeGames()">
-            <ion-card button [routerLink]="['/wiki-detail', game.id]"
-              style="border:1px solid #ccc; border-radius:6px; background:#fff; box-shadow:0 2px 5px rgba(0,0,0,.05); transition: transform 0.2s;">
-              <img [src]="game.image_url" alt="{{game.title}}"
-                style="width:100%; height:250px; border-bottom:1px solid #ddd; border-top-left-radius:6px; border-top-right-radius:6px;">
-              <ion-card-content
-                style="text-align:center; font-size:.92rem; font-weight:600; color:#0c1a2b; margin-top:8px;">
-                {{ game.title }}
-              </ion-card-content>
+            <ion-card button [routerLink]="['/wiki-detail', game.id]" class="card">
+              <img [src]="game.image_url" [alt]="game.title">
+              <ion-card-content>{{ game.title }}</ion-card-content>
             </ion-card>
           </ion-col>
         </ion-row>
@@ -99,24 +72,19 @@
     </section>
 
     <!-- SECCIÓN FINAL -->
-    <section style="margin-top:40px; border-top:1px solid #ccc; padding-top:25px;">
-      <h3 style="font-size:1.1rem; color:#0c1a2b; font-weight:600; margin-bottom:6px;">Nota Informativa</h3>
-      <p style="font-size:.9rem; color:#444; line-height:1.55;">
+    <section class="final-section">
+      <h3>Nota Informativa</h3>
+      <p>
         Mantente al día con los parches y novedades de tus juegos favoritos.
         Usa la aplicación para recibir alertas, noticias y contenido exclusivo de manera inmediata.
       </p>
     </section>
-<div *ngIf="showInstallBanner" class="install-banner">
-  <button (click)="showInstallPrompt()">Instalar App</button>
-  <button (click)="closeInstallBanner()">Cerrar</button>
-</div>
-
 
   </div>
 
 </ion-content>
 
-<ion-footer *ngIf="isMobile">
+<ion-footer [hidden]="!isMobile">
   <ion-toolbar>
     <app-bottombar></app-bottombar>
   </ion-toolbar>

@@ -1,2 +1,96 @@
 
 
+.home-content {
+  --background: #ffffff;
+  font-family: 'Times New Roman', serif;
+  color: #222;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 15px;
+  border-bottom: 2px solid #ccc;
+}
+
+.hero h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #0c1a2b;
+  margin: 0;
+}
+
+.hero p {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.install-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e0f7ff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 15px;
+}
+
+.highlighted h2, .recommendations h2 {
+  font-size: 1.6rem;
+  color: #0c1a2b;
+  border-left: 4px solid #3b5998;
+  padding-left: 12px;
+  font-weight: 600;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.07);
+  transition: transform 0.2s;
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  border-bottom: 1px solid #ddd;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.card ion-card-content {
+  text-align: center;
+  font-size: .92rem;
+  font-weight: 600;
+  color: #0c1a2b;
+  margin-top: 8px;
+}
+
+.final-section {
+  margin-top: 40px;
+  border-top: 1px solid #ccc;
+  padding-top: 25px;
+}
+
+.final-section h3 {
+  font-size: 1.1rem;
+  color: #0c1a2b;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.final-section p {
+  font-size: .9rem;
+  color: #444;
+  line-height: 1.55;
+}
