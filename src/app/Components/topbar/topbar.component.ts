@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
@@ -22,7 +23,7 @@ export class TopbarComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(event: Event) {   // ✅ Asegúrate de incluir el parámetro
     this.checkScreen();
   }
 

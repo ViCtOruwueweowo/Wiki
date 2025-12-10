@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CrearPlataformaComponent } from './crear-plataforma.component';
+import { NotificacionesComponent } from './notificaciones.component';
 
-describe('CrearPlataformaComponent', () => {
-  let component: CrearPlataformaComponent;
-  let fixture: ComponentFixture<CrearPlataformaComponent>;
+describe('NotificacionesComponent', () => {
+  let component: NotificacionesComponent;
+  let fixture: ComponentFixture<NotificacionesComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrearPlataformaComponent ],
+      declarations: [ NotificacionesComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CrearPlataformaComponent);
+    fixture = TestBed.createComponent(NotificacionesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

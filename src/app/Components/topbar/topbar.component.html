@@ -15,14 +15,12 @@
       <!-- Mostrar favoritos solo si existe userRole -->
       <ion-button *ngIf="userRole" routerLink="/favorites" fill="clear" style="font-weight:600; color:#0c1a2b;">Favoritos</ion-button>
 
-      <!-- Gestión solo si userRole == 'admin' -->
-      <ion-button *ngIf="userRole === 'admin'" routerLink="/gestion" fill="clear" style="font-weight:600; color:#0c1a2b;">Gestion</ion-button>
-
       <!-- Perfil si hay sesión -->
       <ion-button *ngIf="userRole" routerLink="/profile" fill="clear" style="font-weight:600; color:#0c1a2b;">Yo</ion-button>
       <!-- Mostrar Login solo si NO hay userRole -->
       <ion-button *ngIf="!userRole" routerLink="/login" fill="clear" style="font-weight:600; color:#0c1a2b;">Iniciar</ion-button>
 
     </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>

@@ -3,8 +3,8 @@
 
     <!-- Siempre visible -->
     <ion-tab-button routerLink="/">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>Inicio</ion-label>
+  <ion-icon name="home-outline"></ion-icon>
+  Inicio
     </ion-tab-button>
 
     <ion-tab-button routerLink="/wikis">
@@ -22,14 +22,6 @@
       <ion-tab-button routerLink="/profile">
         <ion-icon name="person-circle-outline"></ion-icon>
         <ion-label>Yo</ion-label>
-      </ion-tab-button>
-    </ng-container>
-
-    <!-- Gestión solo para admin -->
-    <ng-container *ngIf="userRole === 'admin'">
-      <ion-tab-button routerLink="/gestion">
-        <ion-icon name="settings-outline"></ion-icon>
-        <ion-label>Gestion</ion-label>
       </ion-tab-button>
     </ng-container>
 

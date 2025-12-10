@@ -27,30 +27,6 @@ export const routes: Routes = [
     loadComponent: () => import('./Pages/register/register.page').then( m => m.RegisterPage)
   },
   {
-    path: 'gestion',
-    loadComponent: () => import('./Pages/gestion/gestion.page').then( m => m.GestionPage)
-  },
-  {
-    path: 'platform',
-    loadComponent: () => import('./Pages/platform/platform.page').then( m => m.PlatformPage)
-  },
-  {
-    path: 'developer',
-    loadComponent: () => import('./Pages/developer/developer.page').then( m => m.DeveloperPage)
-  },
-  {
-    path: 'category',
-    loadComponent: () => import('./Pages/category/category.page').then( m => m.CategoryPage)
-  },
-  {
-    path: 'developer',
-    loadComponent: () => import('./Pages/developer/developer.page').then( m => m.DeveloperPage)
-  },
-  {
-    path: 'games',
-    loadComponent: () => import('./Pages/games/games.page').then( m => m.GamesPage)
-  },
-  {
     path: 'wiki-detail/:id',
     loadComponent: () => import('./Pages/wiki-detail/wiki-detail.page').then( m => m.WikiDetailPage)
   },
