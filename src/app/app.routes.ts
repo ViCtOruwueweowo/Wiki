@@ -38,5 +38,9 @@ export const routes: Routes = [
     path: 'favorites',
     loadComponent: () => import('./Pages/favorites/favorites.page').then( m => m.FavoritesPage)
   },
+  {
+    path: 'notifications',
+    loadComponent: () => import('./Pages/notification/notification.page').then( m => m.NotificationPage)
+  },
   
 ];

@@ -2,7 +2,7 @@
   <app-topbar></app-topbar>
 </ion-header>
 
-<ion-content fullscreen="true" class="home-content">
+<ion-content fullscreen class="home-content">
 
   <!-- HERO PRINCIPAL -->
   <section class="hero">
@@ -10,7 +10,7 @@
     <p>La enciclopedia de referencia para jugadores y desarrolladores</p>
   </section>
 
-    <!-- TOAST DE ACTUALIZACION PWA -->
+  <!-- BANNER DE ACTUALIZACIÓN PWA -->
   <ng-container *ngIf="showUpdateAvailable">
     <div class="update-banner">
       <p>¡Nueva versión disponible! Actualiza para continuar.</p>
@@ -19,8 +19,7 @@
     </div>
   </ng-container>
 
-
-  <!-- TOAST DE INSTALACIÓN PWA -->
+  <!-- BANNER DE INSTALACIÓN PWA -->
   <ng-container *ngIf="showInstallBanner">
     <div class="install-banner-modal">
       <div class="install-header">
@@ -33,7 +32,6 @@
     </div>
   </ng-container>
 
-
   <div class="container">
 
     <!-- SECCIONES DESTACADAS -->
@@ -41,7 +39,6 @@
       <h2>Secciones Destacadas</h2>
       <ion-grid>
         <ion-row>
-
           <ion-col size="12" size-md="6" size-lg="4">
             <ion-card button class="highlight-card">
               <ion-card-header class="card-header">
@@ -74,7 +71,6 @@
               </ion-card-content>
             </ion-card>
           </ion-col>
-
         </ion-row>
       </ion-grid>
     </section>

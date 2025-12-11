@@ -53,7 +53,7 @@ export class SecondFactorPage implements OnInit {
     });
     await loading.present();
 
-    const url = `https://143.110.205.116/api/auth/verify-2fa?code=${code}&temporaryToken=${temporaryToken}`;
+    const url = `http://127.0.0.1:8000/api/auth/verify-2fa?code=${code}&temporaryToken=${temporaryToken}`;
 
     this.http.post<any>(url, {}).subscribe({
       next: async (res) => {

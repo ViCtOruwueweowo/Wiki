@@ -14,6 +14,7 @@
 
       <!-- Mostrar favoritos solo si existe userRole -->
       <ion-button *ngIf="userRole" routerLink="/favorites" fill="clear" style="font-weight:600; color:#0c1a2b;">Favoritos</ion-button>
+      <ion-button *ngIf="userRole" routerLink="/notifications" fill="clear" style="font-weight:600; color:#0c1a2b;">Notificaciones</ion-button>
 
       <!-- Perfil si hay sesión -->
       <ion-button *ngIf="userRole" routerLink="/profile" fill="clear" style="font-weight:600; color:#0c1a2b;">Yo</ion-button>

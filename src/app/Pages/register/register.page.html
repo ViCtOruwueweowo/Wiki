@@ -15,7 +15,7 @@
           <ion-input type="text" [(ngModel)]="first_name" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isNameInvalid()">
-          <p class="ion-padding-start" style="font-size:0.85rem;">El nombre debe tener solo letras y al menos 2 caracteres.</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">El nombre debe tener solo letras y al menos 5 caracteres.</p>
         </ion-text>
 
         <!-- Apellido -->
@@ -24,7 +24,7 @@
           <ion-input type="text" [(ngModel)]="last_name" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isLastNameInvalid()">
-          <p class="ion-padding-start" style="font-size:0.85rem;">El apellido debe tener solo letras y al menos 2 caracteres.</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">El apellido debe tener solo letras y al menos 5 caracteres.</p>
         </ion-text>
 
         <!-- Teléfono -->
@@ -33,7 +33,7 @@
           <ion-input type="tel" inputmode="numeric" [(ngModel)]="phone" required></ion-input>
         </ion-item>
         <ion-text color="danger" *ngIf="isPhoneInvalid()">
-          <p class="ion-padding-start" style="font-size:0.85rem;">Debe contener solo números (8-15 dígitos).</p>
+          <p class="ion-padding-start" style="font-size:0.85rem;">Debe contener solo números (10 dígitos).</p>
         </ion-text>
 
         <!-- Correo -->

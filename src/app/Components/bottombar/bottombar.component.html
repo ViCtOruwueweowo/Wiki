@@ -1,10 +1,11 @@
 <ion-tabs>
+
   <ion-tab-bar slot="bottom">
 
     <!-- Siempre visible -->
     <ion-tab-button routerLink="/">
-  <ion-icon name="home-outline"></ion-icon>
-  Inicio
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
     <ion-tab-button routerLink="/wikis">
@@ -12,11 +13,16 @@
       <ion-label>Wikis</ion-label>
     </ion-tab-button>
 
-    <!-- Favoritos solo si hay sesión -->
+    <!-- Favoritos, Notificaciones y Perfil solo si hay sesión -->
     <ng-container *ngIf="userRole">
       <ion-tab-button routerLink="/favorites">
         <ion-icon name="heart-outline"></ion-icon>
         <ion-label>Favoritos</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="/notifications">
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
       </ion-tab-button>
 
       <ion-tab-button routerLink="/profile">
@@ -34,4 +40,5 @@
     </ng-container>
 
   </ion-tab-bar>
+
 </ion-tabs>

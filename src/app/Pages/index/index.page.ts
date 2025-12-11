@@ -82,7 +82,7 @@ export class IndexPage implements OnInit {
   // ====== CARGA DE JUEGOS DESDE TU API ======
   async getGames() {
     try {
-      const apiUrl = 'https://grupoduran.shop/api/auth/games';
+      const apiUrl = 'http://127.0.0.1:8000/api/auth/games';
       const response = await fetch(apiUrl);
       const data = await response.json();
       this.games = data.data || [];
