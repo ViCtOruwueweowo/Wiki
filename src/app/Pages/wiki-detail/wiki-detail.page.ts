@@ -7,8 +7,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 // IMPORTAR TODO lo que usas 🔥
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons,
-  IonCard, IonCardContent, IonChip, IonLabel
+  IonCard, IonCardContent, IonChip, IonLabel,  IonIcon
 } from '@ionic/angular/standalone';
+
+import { heart } from 'ionicons/icons';
 
 @Component({
   selector: 'app-wiki-detail',
@@ -20,14 +22,14 @@ import {
 
     // IMPORTACIÓN COMPLETA 🔥
     IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons,
-    IonCard, IonCardContent, IonChip, IonLabel
+    IonCard, IonCardContent, IonChip, IonLabel, IonIcon 
   ]
 })
 export class WikiDetailPage implements OnInit {
 
   juego: any = null;
   id!: number;
-
+  heart = heart;
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class WikiDetailPage implements OnInit {
   }
 
   cargarJuego(){
-    this.http.get<any>("https://127.0.0.1:8000/api/auth/games")
+    this.http.get<any>("http://127.0.0.1:8000/api/auth/games")
       .subscribe(res => {
         this.juego = res.data.find((j: any) => j.id === this.id);
       });
