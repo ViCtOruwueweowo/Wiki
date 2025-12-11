@@ -1,20 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { TopbarComponent } from 'src/app/Components/topbar/topbar.component';
+import { BottombarComponent } from 'src/app/Components/bottombar/bottombar.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.page.html',
   styleUrls: ['./notification.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    IonicModule,
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    TopbarComponent,
+    BottombarComponent
+  ]
 })
 export class NotificationPage implements OnInit {
+  isMobile: boolean = false;
 
-  constructor() { }
+  @HostListener('window:resize')
+  onResize() { this.checkScreen(); }
+
+  constructor() {}
 
   ngOnInit() {
+    this.checkScreen();
   }
 
+  checkScreen() {
+    this.isMobile = window.innerWidth <= 768;
+  }
 }
